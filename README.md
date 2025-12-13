@@ -2,6 +2,10 @@
 
 An educational cryptocurrency wallet generator and balance checker for Bitcoin and Ethereum.
 
+**Available in two versions:**
+- 🪟 **Windows GUI Application** - User-friendly desktop software (see [WINDOWS_GUIDE.md](WINDOWS_GUIDE.md))
+- 💻 **Command-Line Tool** - Advanced terminal interface (documentation below)
+
 ## ⚠️ Educational Purpose Only
 
 This tool is designed for **educational purposes only** to demonstrate:
@@ -17,6 +21,15 @@ This tool is designed for **educational purposes only** to demonstrate:
 
 ## Features
 
+### Windows GUI Application 🪟
+- ✅ **User-friendly graphical interface** - No command-line experience needed
+- ✅ **One-click executable** - No Python installation required
+- ✅ **Real-time statistics dashboard** - Visual feedback on generation rate and progress
+- ✅ **Activity log** - See what's happening in real-time
+- ✅ **Easy configuration** - Simple dropdowns and checkboxes
+- 📖 **See [WINDOWS_GUIDE.md](WINDOWS_GUIDE.md) for detailed instructions**
+
+### Command-Line Tool 💻
 - ✅ Bitcoin wallet generation and checking
 - ✅ Ethereum wallet generation and checking
 - ✅ Real-time balance checking via public APIs
@@ -26,12 +39,31 @@ This tool is designed for **educational purposes only** to demonstrate:
 
 ## Installation
 
-### Prerequisites
+### Option 1: Windows GUI Application (Easiest) 🪟
+
+**For Windows users who want a simple desktop application:**
+
+1. Download `WalletHunter.exe` from releases (or build it yourself)
+2. Double-click to run - **No installation needed!**
+3. See [WINDOWS_GUIDE.md](WINDOWS_GUIDE.md) for complete instructions
+
+**To build the Windows executable yourself:**
+```cmd
+pip install -r requirements-build.txt
+build_windows.bat
+```
+The executable will be in `dist\WalletHunter.exe`
+
+### Option 2: Command-Line Tool 💻
+
+**For developers and advanced users:**
+
+#### Prerequisites
 
 - Python 3.7 or higher
 - pip (Python package installer)
 
-### Setup
+#### Setup
 
 1. Clone the repository:
 ```bash
@@ -46,7 +78,25 @@ pip install -r requirements.txt
 
 ## Usage
 
-### Basic Usage
+### Windows GUI Application 🪟
+
+Simply run `WalletHunter.exe` or:
+```cmd
+python wallet_hunter_gui.py
+```
+
+**Features:**
+- Select wallet type (Bitcoin/Ethereum)
+- Enable/disable balance checking
+- Configure API delay
+- Real-time statistics and activity log
+- One-click start/stop
+
+📖 **See [WINDOWS_GUIDE.md](WINDOWS_GUIDE.md) for screenshots and detailed usage**
+
+### Command-Line Tool 💻
+
+#### Basic Usage
 
 Run the wallet hunter with default settings (Bitcoin):
 ```bash
