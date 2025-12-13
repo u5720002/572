@@ -14,9 +14,11 @@ A user-friendly **Windows GUI application** for educational cryptocurrency walle
 
 ### Option 1: Download Pre-built Executable (Easiest)
 
-1. Download `WalletHunter.exe` from the releases
+1. Download `WalletHunter.exe` from the [GitHub releases page](https://github.com/u5720002/572/releases)
 2. Double-click to run - **No Python installation required!**
 3. Windows may show a security warning - click "More info" → "Run anyway"
+
+**Note**: Pre-built executables will be available in future releases. For now, use Option 2 or 3.
 
 ### Option 2: Run from Source (Requires Python)
 

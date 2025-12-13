@@ -263,7 +263,31 @@ class WalletHunterGUI:
         self.log("-" * 80)
         
     def hunt_worker(self, wallet_type, check_balance, delay):
-        """Worker thread for hunting"""
+        """
+        Worker thread for wallet generation and balance checking.
+        
+        This method runs in a separate thread to prevent UI blocking.
+        It continuously generates wallets and checks balances until stopped.
+        
+        Args:
+            wallet_type (str): Either "Bitcoin" or "Ethereum"
+            check_balance (bool): Whether to check wallet balances via API
+            delay (float): Seconds to wait between API calls
+            
+        Thread Communication:
+            - Updates self.checked_count directly (thread-safe counter)
+            - Sends messages to update_queue for UI updates
+            - Checks self.is_running flag to know when to stop
+            
+        Queue Messages:
+            - ("checked", count): Wallet count update
+            - ("found", dict): Wallet with balance found
+            - ("error", str): Error occurred
+            
+        Exceptions:
+            All exceptions are caught and sent to the queue as error messages
+            to prevent thread crashes and inform the user.
+        """
         import time
         
         try:
@@ -391,7 +415,8 @@ def main():
         # You can add an icon file later
         # root.iconbitmap('icon.ico')
         pass
-    except:
+    except (FileNotFoundError, tk.TclError):
+        # Icon file not found or invalid, continue without icon
         pass
         
     root.mainloop()
