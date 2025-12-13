@@ -1,0 +1,8 @@
+# Wallet Hunter Windows Build Script
+# This script creates a standalone Windows executable (.exe) from the Python GUI application
+
+# Requirements for building Windows executable
+requests>=2.31.0
+ecdsa>=0.18.0
+pycryptodome>=3.18.0
+pyinstaller>=6.0.0
