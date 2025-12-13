@@ -141,8 +141,7 @@ While running, the program displays real-time statistics:
 
 - `requests` - HTTP library for API calls
 - `ecdsa` - Elliptic curve cryptography
-- `pysha3` - SHA-3 (Keccak) hashing for Ethereum
-- `eth-keys` - Ethereum key utilities
+- `pycryptodome` - Cryptographic library including Keccak-256 hashing for Ethereum
 
 ## Security Considerations
 

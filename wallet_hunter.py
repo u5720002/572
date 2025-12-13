@@ -289,7 +289,10 @@ Balance: {balance}
         print(f"Total Checked: {self.checked_count}")
         print(f"Total Found: {self.found_count}")
         print(f"Time Elapsed: {elapsed:.2f} seconds")
-        print(f"Average Rate: {self.checked_count/elapsed:.2f} wallets/second")
+        if elapsed > 0:
+            print(f"Average Rate: {self.checked_count/elapsed:.2f} wallets/second")
+        else:
+            print(f"Average Rate: N/A (insufficient time)")
         print(f"{'='*60}")
 
 
