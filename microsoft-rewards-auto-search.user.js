@@ -54,10 +54,35 @@
         'festival', 'celebration', 'holiday', 'tradition', 'custom'
     ];
 
-    // State
-    let isRunning = false;
-    let searchCount = 0;
-    let totalSearches = CONFIG.USE_MOBILE_MODE ? CONFIG.MOBILE_SEARCHES : CONFIG.DESKTOP_SEARCHES;
+    // State management using localStorage for persistence across page loads
+    const STORAGE_KEY = 'ms-rewards-auto-search-state';
+    
+    function getState() {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+            try {
+                return JSON.parse(stored);
+            } catch (e) {
+                return null;
+            }
+        }
+        return null;
+    }
+    
+    function saveState(state) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+    
+    function clearState() {
+        localStorage.removeItem(STORAGE_KEY);
+    }
+    
+    let state = getState() || {
+        isRunning: false,
+        searchCount: 0,
+        totalSearches: CONFIG.USE_MOBILE_MODE ? CONFIG.MOBILE_SEARCHES : CONFIG.DESKTOP_SEARCHES,
+        startTime: null
+    };
 
     // Utility Functions
     function getRandomDelay() {
@@ -106,11 +131,11 @@
                     <strong>Mode:</strong> <span id="search-mode">${CONFIG.USE_MOBILE_MODE ? 'Mobile' : 'Desktop'}</span>
                 </div>
                 <div style="margin-bottom: 5px; font-size: 13px;">
-                    <strong>Progress:</strong> <span id="search-progress">0/${totalSearches}</span>
+                    <strong>Progress:</strong> <span id="search-progress">${state.searchCount}/${state.totalSearches}</span>
                 </div>
                 <div style="margin-bottom: 10px;">
                     <div style="width: 100%; height: 8px; background: #e0e0e0; border-radius: 4px; overflow: hidden;">
-                        <div id="search-progress-bar" style="width: 0%; height: 100%; background: #0067b8; transition: width 0.3s;"></div>
+                        <div id="search-progress-bar" style="width: ${(state.searchCount/state.totalSearches*100)}%; height: 100%; background: #0067b8; transition: width 0.3s;"></div>
                     </div>
                 </div>
             </div>
@@ -125,6 +150,7 @@
                     cursor: pointer;
                     font-size: 13px;
                     font-weight: 500;
+                    ${state.isRunning ? 'display: none;' : ''}
                 ">Start</button>
                 <button id="stop-search-btn" style="
                     flex: 1;
@@ -136,7 +162,7 @@
                     cursor: pointer;
                     font-size: 13px;
                     font-weight: 500;
-                    display: none;
+                    ${state.isRunning ? '' : 'display: none;'}
                 ">Stop</button>
             </div>
             <button id="close-panel-btn" style="
@@ -172,23 +198,24 @@
         const progressBar = document.getElementById('search-progress-bar');
         
         if (progressText) {
-            progressText.textContent = `${searchCount}/${totalSearches}`;
+            progressText.textContent = `${state.searchCount}/${state.totalSearches}`;
         }
         
         if (progressBar) {
-            const percentage = (searchCount / totalSearches) * 100;
+            const percentage = (state.searchCount / state.totalSearches) * 100;
             progressBar.style.width = `${percentage}%`;
         }
     }
 
     function performSearch() {
-        if (!isRunning || searchCount >= totalSearches) {
+        if (!state.isRunning || state.searchCount >= state.totalSearches) {
             stopSearching();
             return;
         }
 
         const query = generateRandomQuery();
-        searchCount++;
+        state.searchCount++;
+        saveState(state);
         
         // Update progress
         updateProgress();
@@ -201,10 +228,13 @@
     }
 
     function startSearching() {
-        if (isRunning) return;
+        if (state.isRunning) return;
 
-        isRunning = true;
-        searchCount = 0;
+        state.isRunning = true;
+        state.searchCount = 0;
+        state.totalSearches = CONFIG.USE_MOBILE_MODE ? CONFIG.MOBILE_SEARCHES : CONFIG.DESKTOP_SEARCHES;
+        state.startTime = Date.now();
+        saveState(state);
         
         const startBtn = document.getElementById('start-search-btn');
         const stopBtn = document.getElementById('stop-search-btn');
@@ -221,22 +251,21 @@
     }
 
     function performNextSearch() {
-        if (!isRunning || searchCount >= totalSearches) {
+        if (!state.isRunning || state.searchCount >= state.totalSearches) {
             stopSearching();
             return;
         }
 
         performSearch();
-
-        // Schedule next search with random delay
-        if (searchCount < totalSearches) {
-            const delay = getRandomDelay();
-            setTimeout(performNextSearch, delay);
-        }
     }
 
     function stopSearching() {
-        isRunning = false;
+        const wasRunning = state.isRunning;
+        const count = state.searchCount;
+        const total = state.totalSearches;
+        
+        state.isRunning = false;
+        clearState();
         
         const startBtn = document.getElementById('start-search-btn');
         const stopBtn = document.getElementById('stop-search-btn');
@@ -244,8 +273,8 @@
         if (startBtn) startBtn.style.display = 'block';
         if (stopBtn) stopBtn.style.display = 'none';
 
-        if (searchCount >= totalSearches) {
-            alert(`✅ Completed ${searchCount} searches! Check your Microsoft Rewards dashboard.`);
+        if (wasRunning && count >= total) {
+            alert(`✅ Completed ${count} searches! Check your Microsoft Rewards dashboard.`);
         }
     }
 
@@ -320,8 +349,14 @@
         // Create control panel
         const panel = createControlPanel();
 
-        // Auto start if enabled
-        if (CONFIG.AUTO_START) {
+        // If we're in the middle of a search session, continue
+        if (state.isRunning) {
+            const delay = getRandomDelay();
+            setTimeout(() => {
+                performNextSearch();
+            }, delay);
+        } else if (CONFIG.AUTO_START && !state.startTime) {
+            // Auto start if enabled and this is a fresh start
             setTimeout(() => {
                 startSearching();
             }, 2000);
