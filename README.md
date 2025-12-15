@@ -40,6 +40,10 @@ Alternatively, you can manually install by:
 
 ## Usage
 
+### Demo Page
+
+Open `demo.html` in your browser after installing the userscript to see it in action. The demo page contains sample text you can select to test the functionality.
+
 ### Basic Usage
 
 1. **Select text** on any webpage by highlighting it with your mouse
