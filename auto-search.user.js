@@ -48,7 +48,9 @@
         defaultEngine: 'google',
         showPopup: true,
         useCtrlShift: true, // Ctrl+Shift+S for quick search
-        openInNewTab: true
+        openInNewTab: true,
+        popupZIndex: 999999, // Z-index for popup to appear above other elements
+        selectionDelay: 100 // Delay in ms before showing popup after selection
     };
 
     // Load saved configuration
@@ -78,7 +80,7 @@
             border-radius: 8px;
             padding: 10px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            z-index: 999999;
+            z-index: ${config.popupZIndex};
             display: none;
             font-family: Arial, sans-serif;
             min-width: 200px;
@@ -215,7 +217,7 @@
             } else {
                 hidePopup();
             }
-        }, 100);
+        }, config.selectionDelay);
     });
 
     // Handle keyboard shortcut (Ctrl+Shift+S or Cmd+Shift+S on Mac)
