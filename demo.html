@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Search Userscript - Demo Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #4285f4;
+        }
+        .demo-text {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .instructions {
+            background: #e8f0fe;
+            padding: 15px;
+            border-left: 4px solid #4285f4;
+            margin: 20px 0;
+        }
+        code {
+            background: #f1f3f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Auto Search Userscript - Demo Page</h1>
+    
+    <div class="instructions">
+        <h2>How to Test:</h2>
+        <ol>
+            <li>Install the <strong>Auto Search</strong> userscript in Violentmonkey</li>
+            <li>Select any text below with your mouse</li>
+            <li>A popup menu will appear with search engine options</li>
+            <li>Or press <code>Ctrl+Shift+S</code> to search with your default engine</li>
+        </ol>
+    </div>
+
+    <div class="demo-text">
+        <h3>Sample Text to Select and Search:</h3>
+        <p>
+            <strong>JavaScript</strong> is a high-level, interpreted programming language that is one of the core technologies of the World Wide Web.
+        </p>
+        <p>
+            Try selecting terms like <strong>Violentmonkey</strong>, <strong>userscript</strong>, or <strong>GitHub</strong> to search for them!
+        </p>
+        <p>
+            The <strong>React framework</strong> is a popular JavaScript library for building user interfaces, maintained by Meta.
+        </p>
+        <p>
+            <strong>Machine Learning</strong> is a subset of artificial intelligence that focuses on the development of algorithms and statistical models.
+        </p>
+    </div>
+
+    <div class="demo-text">
+        <h3>Features to Test:</h3>
+        <ul>
+            <li>Select text and click a search engine from the popup</li>
+            <li>Use keyboard shortcut: select text + <code>Ctrl+Shift+S</code></li>
+            <li>Right-click the Violentmonkey icon to access configuration options</li>
+            <li>Toggle features on/off in the script menu</li>
+            <li>Change the default search engine</li>
+        </ul>
+    </div>
+
+    <div class="instructions">
+        <h3>✨ What Should Happen:</h3>
+        <p>
+            When you select any text on this page (or any website), a beautiful popup will appear 
+            near your cursor with buttons for different search engines. Clicking any button will 
+            open a new tab with search results for your selected text.
+        </p>
+    </div>
+</body>
+</html>
