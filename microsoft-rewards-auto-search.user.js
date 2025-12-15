@@ -36,7 +36,7 @@
         'education', 'learning', 'knowledge', 'wisdom', 'intelligence',
         'creativity', 'imagination', 'inspiration', 'motivation', 'success',
         'business', 'finance', 'investment', 'marketing', 'entrepreneurship',
-        'technology', 'computer', 'software', 'hardware', 'internet',
+        'computer', 'software', 'hardware', 'internet',
         'programming', 'coding', 'development', 'engineering', 'design',
         'architecture', 'construction', 'building', 'infrastructure', 'transportation',
         'environment', 'ecology', 'sustainability', 'conservation', 'climate',
@@ -96,9 +96,11 @@
             const randomIndex = Math.floor(Math.random() * SEARCH_WORDS.length);
             words.push(SEARCH_WORDS[randomIndex]);
         }
-        // Add random number or year to make queries more unique
+        // Add random year (1920-2024) to make queries more unique
+        const MIN_YEAR = 1920;
+        const YEAR_RANGE = 105; // 1920 to 2024
         if (Math.random() > 0.5) {
-            words.push(Math.floor(Math.random() * 100) + 1920);
+            words.push(Math.floor(Math.random() * YEAR_RANGE) + MIN_YEAR);
         }
         return words.join(' ');
     }
@@ -221,6 +223,7 @@
         updateProgress();
 
         // Perform search by updating URL
+        // form=QBLH is Bing's search form parameter for standard web search
         const searchUrl = `https://www.bing.com/search?q=${encodeURIComponent(query)}&form=QBLH`;
         
         // Navigate to search URL
