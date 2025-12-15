@@ -14,9 +14,11 @@
 
     // Configuration
     const CONFIG = {
-        SEARCH_COUNT: 30, // Number of searches to perform
-        MIN_DELAY: 3000,  // Minimum delay between searches (ms)
-        MAX_DELAY: 6000,  // Maximum delay between searches (ms)
+        SEARCH_COUNT: 30,      // Number of searches to perform
+        MIN_DELAY: 3000,       // Minimum delay between searches (ms)
+        MAX_DELAY: 6000,       // Maximum delay between searches (ms)
+        INITIAL_DELAY: 2000,   // Initial delay before auto-continue (ms)
+        UNIQUE_ID_RANGE: 10000, // Range for unique ID generation
         STORAGE_KEY: 'msRewardsAutoSearch'
     };
 
@@ -47,7 +49,7 @@
         const randomIndex = Math.floor(Math.random() * SEARCH_TERMS.length);
         const term = SEARCH_TERMS[randomIndex];
         // Add random number to make searches unique
-        const uniqueId = Math.floor(Math.random() * 10000);
+        const uniqueId = Math.floor(Math.random() * CONFIG.UNIQUE_ID_RANGE);
         return `${term} ${uniqueId}`;
     }
 
@@ -67,13 +69,22 @@
         const state = getSearchState();
         const today = new Date().toDateString();
         
+        // Only reset if it's a new day and we haven't reset yet
         if (state.lastRun !== today) {
-            // Reset count for new day
-            saveSearchState({ count: 0, lastRun: today });
-            return true;
+            return true; // New day, allow running
         }
         
         return state.count < CONFIG.SEARCH_COUNT;
+    }
+
+    // Reset state for new day
+    function resetForNewDay() {
+        const state = getSearchState();
+        const today = new Date().toDateString();
+        
+        if (state.lastRun !== today) {
+            saveSearchState({ count: 0, lastRun: today });
+        }
     }
 
     // Perform a single search
@@ -152,6 +163,9 @@
 
     // Start auto search
     function startAutoSearch() {
+        // Reset counter if it's a new day
+        resetForNewDay();
+        
         if (!shouldRunToday()) {
             alert('You have completed all searches for today!');
             return;
@@ -218,7 +232,7 @@
         createControlPanel();
 
         // Auto-continue if in progress
-        setTimeout(autoContinue, 2000);
+        setTimeout(autoContinue, CONFIG.INITIAL_DELAY);
     }
 
     // Start the script
