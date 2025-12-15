@@ -166,11 +166,11 @@
             CONFIG.searchCount = searchCount;
             GM_setValue('searchCount', searchCount);
         }
-        if (delayMin >= 1000 && delayMin <= 30000) {
+        if (delayMin >= 1000 && delayMin <= 30000 && delayMin <= delayMax) {
             CONFIG.delayMin = delayMin;
             GM_setValue('delayMin', delayMin);
         }
-        if (delayMax >= 1000 && delayMax <= 30000) {
+        if (delayMax >= 1000 && delayMax <= 30000 && delayMax >= delayMin) {
             CONFIG.delayMax = delayMax;
             GM_setValue('delayMax', delayMax);
         }
@@ -179,7 +179,13 @@
     // Generate random search query
     function generateSearchQuery() {
         const word1 = CONFIG.randomWords[Math.floor(Math.random() * CONFIG.randomWords.length)];
-        const word2 = CONFIG.randomWords[Math.floor(Math.random() * CONFIG.randomWords.length)];
+        let word2 = CONFIG.randomWords[Math.floor(Math.random() * CONFIG.randomWords.length)];
+        
+        // Ensure word2 is different from word1
+        while (word2 === word1 && CONFIG.randomWords.length > 1) {
+            word2 = CONFIG.randomWords[Math.floor(Math.random() * CONFIG.randomWords.length)];
+        }
+        
         const timestamp = Date.now();
         
         // Combine words with random number for uniqueness
@@ -263,17 +269,11 @@
         const query = generateSearchQuery();
         const delay = getRandomDelay();
         
-        console.log(`[Rewards Auto Search] Performing search ${searchesCompleted}: "${query}" (next in ${delay}ms)`);
-        
-        if (searchesCompleted < CONFIG.searchCount) {
-            // Schedule next search
-            GM_setValue('nextSearchTime', Date.now() + delay);
-            setTimeout(() => {
-                performSearch(query);
-            }, delay);
-        } else {
+        // Schedule next search (including the last one)
+        GM_setValue('nextSearchTime', Date.now() + delay);
+        setTimeout(() => {
             performSearch(query);
-        }
+        }, delay);
     }
 
     // Stop searching
@@ -304,8 +304,11 @@
             searchesCompleted = savedSearchesCompleted;
             isRunning = true;
             
-            document.getElementById('start-search-btn').disabled = true;
-            document.getElementById('stop-search-btn').disabled = false;
+            const startBtn = document.getElementById('start-search-btn');
+            const stopBtn = document.getElementById('stop-search-btn');
+            
+            if (startBtn) startBtn.disabled = true;
+            if (stopBtn) stopBtn.disabled = false;
             
             updateProgress();
             
