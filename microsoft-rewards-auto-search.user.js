@@ -345,7 +345,9 @@
     // Initialize
     function init() {
         // Only run on Bing homepage or search pages
-        if (!window.location.hostname.includes('bing.com')) {
+        // Check for exact domain match to prevent running on malicious sites like evil-bing.com
+        if (window.location.hostname !== 'www.bing.com' && 
+            window.location.hostname !== 'bing.com') {
             return;
         }
 
