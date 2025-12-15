@@ -18,6 +18,8 @@
         mobileSearches: 20,
         delayBetweenSearches: 3000, // 3 seconds between searches
         randomDelayVariation: 2000, // Add up to 2 seconds random variation
+        queryUniquenessRange: 10000, // Random number range for making queries unique
+        resumeTimeoutMs: 5 * 60 * 1000, // Resume search within 5 minutes
     };
 
     // Random search queries pool
@@ -55,7 +57,7 @@
     // Utility function to get a random query
     function getRandomQuery() {
         const randomIndex = Math.floor(Math.random() * searchQueries.length);
-        return searchQueries[randomIndex] + ' ' + Math.floor(Math.random() * 10000);
+        return searchQueries[randomIndex] + ' ' + Math.floor(Math.random() * CONFIG.queryUniquenessRange);
     }
 
     // Utility function to get random delay
@@ -253,8 +255,8 @@
         if (state) {
             try {
                 const { current, total, mode, timestamp } = JSON.parse(state);
-                // Resume if less than 5 minutes ago
-                if (Date.now() - timestamp < 5 * 60 * 1000 && current < total) {
+                // Resume if within the configured timeout period
+                if (Date.now() - timestamp < CONFIG.resumeTimeoutMs && current < total) {
                     currentSearch = current;
                     totalSearches = total;
                     isRunning = true;
