@@ -9,7 +9,7 @@ function claimGiftCard(type, amount) {
     // Add animation to the button
     const cards = document.querySelectorAll('.gift-card');
     cards.forEach(card => {
-        if (card.dataset.type === type && card.dataset.amount == amount) {
+        if (card.dataset.type === type && parseInt(card.dataset.amount) === amount) {
             const button = card.querySelector('.claim-btn');
             button.textContent = 'Claimed! ✓';
             button.style.background = '#4CAF50';
@@ -38,14 +38,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     cards.forEach((card, index) => {
         setTimeout(() => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            
-            setTimeout(() => {
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
-            }, 50);
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
         }, index * 100);
     });
 });
