@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Gift Cards - Claim Now!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎁 FREE Gift Cards Available Today!</h1>
+            <p class="subtitle">Claim your free gift cards now - Limited time offer!</p>
+        </header>
+
+        <div class="gift-cards-grid">
+            <div class="gift-card" data-amount="70" data-type="CashApp">
+                <div class="card-header">
+                    <span class="card-icon">💵</span>
+                    <h3>CashApp</h3>
+                </div>
+                <div class="card-amount">$70</div>
+                <button class="claim-btn" onclick="claimGiftCard('CashApp', 70)">Claim Now</button>
+            </div>
+
+            <div class="gift-card" data-amount="49" data-type="PayPal">
+                <div class="card-header">
+                    <span class="card-icon">💳</span>
+                    <h3>PayPal</h3>
+                </div>
+                <div class="card-amount">$49</div>
+                <button class="claim-btn" onclick="claimGiftCard('PayPal', 49)">Claim Now</button>
+            </div>
+
+            <div class="gift-card" data-amount="90" data-type="Venmo">
+                <div class="card-header">
+                    <span class="card-icon">💸</span>
+                    <h3>Venmo</h3>
+                </div>
+                <div class="card-amount">$90</div>
+                <button class="claim-btn" onclick="claimGiftCard('Venmo', 90)">Claim Now</button>
+            </div>
+
+            <div class="gift-card" data-amount="200" data-type="Chime">
+                <div class="card-header">
+                    <span class="card-icon">🏦</span>
+                    <h3>Chime</h3>
+                </div>
+                <div class="card-amount">$200</div>
+                <button class="claim-btn" onclick="claimGiftCard('Chime', 200)">Claim Now</button>
+            </div>
+
+            <div class="gift-card featured" data-amount="250" data-type="Visa">
+                <div class="featured-badge">BEST VALUE</div>
+                <div class="card-header">
+                    <span class="card-icon">💎</span>
+                    <h3>Visa</h3>
+                </div>
+                <div class="card-amount">$250</div>
+                <button class="claim-btn" onclick="claimGiftCard('Visa', 250)">Claim Now</button>
+            </div>
+
+            <div class="gift-card" data-amount="50" data-type="Walmart">
+                <div class="card-header">
+                    <span class="card-icon">🛒</span>
+                    <h3>Walmart</h3>
+                </div>
+                <div class="card-amount">$50</div>
+                <button class="claim-btn" onclick="claimGiftCard('Walmart', 50)">Claim Now</button>
+            </div>
+
+            <div class="gift-card" data-amount="30" data-type="Amazon">
+                <div class="card-header">
+                    <span class="card-icon">📦</span>
+                    <h3>Amazon</h3>
+                </div>
+                <div class="card-amount">$30</div>
+                <button class="claim-btn" onclick="claimGiftCard('Amazon', 30)">Claim Now</button>
+            </div>
+
+            <div class="gift-card" data-amount="20" data-type="Google Pay">
+                <div class="card-header">
+                    <span class="card-icon">🔍</span>
+                    <h3>Google Pay</h3>
+                </div>
+                <div class="card-amount">$20</div>
+                <button class="claim-btn" onclick="claimGiftCard('Google Pay', 20)">Claim Now</button>
+            </div>
+
+            <div class="gift-card" data-amount="50" data-type="Apple Pay">
+                <div class="card-header">
+                    <span class="card-icon">🍎</span>
+                    <h3>Apple Pay</h3>
+                </div>
+                <div class="card-amount">$50</div>
+                <button class="claim-btn" onclick="claimGiftCard('Apple Pay', 50)">Claim Now</button>
+            </div>
+
+            <div class="gift-card" data-amount="70" data-type="Steam">
+                <div class="card-header">
+                    <span class="card-icon">🎮</span>
+                    <h3>Steam</h3>
+                </div>
+                <div class="card-amount">$70</div>
+                <button class="claim-btn" onclick="claimGiftCard('Steam', 70)">Claim Now</button>
+            </div>
+        </div>
+
+        <div class="total-value">
+            <p>Total Value Available: <strong>$1,029</strong></p>
+        </div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>🎉 Congratulations!</h2>
+            <p id="modal-message"></p>
+            <button class="modal-btn" onclick="closeModal()">Continue</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
