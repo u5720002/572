@@ -191,3 +191,7 @@ function initLiveActivity() {
         addActivity();
     }, Math.random() * 2000 + 3000);
 }
+
+function openReviewForm() {
+    alert('Thank you for your interest in writing a review! 📝\n\nPlease email your review to: support@giftcards.com\n\nInclude:\n✅ Your name (first name and last initial)\n✅ Which gift card you claimed\n✅ Your experience (1-5 stars)\n✅ A brief testimonial\n\nYour feedback helps millions of users!');
+}
