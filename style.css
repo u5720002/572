@@ -702,3 +702,56 @@ header h1 {
         font-size: 2em;
     }
 }
+
+/* Footer */
+.footer {
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 60px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-content p {
+    margin: 10px 0;
+    font-size: 0.95em;
+}
+
+.footer-links {
+    margin-top: 15px;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: opacity 0.3s;
+}
+
+.footer-links a:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 25px 15px;
+        margin-top: 40px;
+    }
+    
+    .footer-content p {
+        font-size: 0.85em;
+    }
+    
+    .footer-links a {
+        display: inline-block;
+        margin: 5px 8px;
+    }
+}
