@@ -29,7 +29,7 @@ function claimGiftCard(type, amount) {
             <div class="redeem-code">
                 <span class="code-visible">${visiblePart}</span><span class="code-hidden">${obscuredPart}</span>
             </div>
-            <div class="redeem-code-note">Check your email for the complete code</div>
+            <div class="redeem-code-note">✔️Verify For Complete Code👉Are You Real🟢</div>
         </div>
     `;
     
