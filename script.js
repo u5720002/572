@@ -42,4 +42,41 @@ document.addEventListener('DOMContentLoaded', function() {
             card.style.transform = 'translateY(0)';
         }, index * 100);
     });
+    
+    // Initialize countdown timer (24 hours from now)
+    startCountdown();
 });
+
+function startCountdown() {
+    // Set countdown to 24 hours from now
+    const endTime = new Date().getTime() + (24 * 60 * 60 * 1000);
+    
+    function updateTimer() {
+        const now = new Date().getTime();
+        const distance = endTime - now;
+        
+        if (distance < 0) {
+            // Timer expired
+            document.querySelectorAll('.countdown').forEach(timer => {
+                timer.textContent = 'EXPIRED';
+            });
+            return;
+        }
+        
+        // Calculate time remaining
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        // Format and display
+        const timeString = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        
+        document.querySelectorAll('.countdown').forEach(timer => {
+            timer.textContent = timeString;
+        });
+    }
+    
+    // Update immediately and then every second
+    updateTimer();
+    setInterval(updateTimer, 1000);
+}

@@ -100,6 +100,23 @@ header h1 {
     text-align: center;
 }
 
+.timer {
+    text-align: center;
+    font-size: 1em;
+    font-weight: bold;
+    color: #FF6B35;
+    margin: 10px 0;
+    padding: 8px;
+    background: rgba(255, 107, 53, 0.1);
+    border-radius: 8px;
+    border: 2px solid rgba(255, 107, 53, 0.3);
+}
+
+.timer .countdown {
+    font-family: 'Courier New', monospace;
+    font-size: 1.1em;
+}
+
 .gift-card.featured .card-amount {
     color: #FF6B35;
 }
