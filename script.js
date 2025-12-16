@@ -193,5 +193,53 @@ function initLiveActivity() {
 }
 
 function openReviewForm() {
-    alert('Thank you for your interest in writing a review! 📝\n\nPlease email your review to: support@giftcards.com\n\nInclude:\n✅ Your name (first name and last initial)\n✅ Which gift card you claimed\n✅ Your experience (1-5 stars)\n✅ A brief testimonial\n\nYour feedback helps millions of users!');
+    const reviewModal = document.getElementById('review-modal');
+    reviewModal.style.display = 'block';
 }
+
+function closeReviewModal() {
+    const reviewModal = document.getElementById('review-modal');
+    reviewModal.style.display = 'none';
+    // Reset form
+    document.getElementById('review-form').reset();
+    // Reset star rating visual
+    const stars = document.querySelectorAll('.star-rating input');
+    stars.forEach(star => star.checked = false);
+}
+
+function submitReview(event) {
+    event.preventDefault();
+    
+    const name = document.getElementById('review-name').value;
+    const rating = document.querySelector('input[name="rating"]:checked').value;
+    const comment = document.getElementById('review-comment').value;
+    
+    // Close the review modal
+    closeReviewModal();
+    
+    // Show success message in the main modal
+    const modal = document.getElementById('modal');
+    const modalMessage = document.getElementById('modal-message');
+    
+    modalMessage.innerHTML = `
+        <strong>Thank you, ${name}!</strong><br><br>
+        Your ${rating}-star review has been submitted successfully! 🎉<br><br>
+        <div style="text-align: left; margin: 20px 0; padding: 15px; background: rgba(76, 175, 80, 0.1); border-radius: 8px; border-left: 4px solid #4CAF50;">
+            <strong>Your Review:</strong><br>
+            <div style="color: #FFD700; margin: 5px 0;">${'⭐'.repeat(parseInt(rating))}</div>
+            "${comment}"
+        </div>
+        Our team will review and publish it within 24 hours.<br>
+        Thank you for helping others!
+    `;
+    
+    modal.style.display = 'block';
+}
+
+// Close review modal when clicking outside of it
+window.addEventListener('click', function(event) {
+    const reviewModal = document.getElementById('review-modal');
+    if (event.target === reviewModal) {
+        closeReviewModal();
+    }
+});
