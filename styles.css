@@ -79,6 +79,14 @@ main {
     margin-bottom: 1rem;
 }
 
+.card-image {
+    width: 200px;
+    height: auto;
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
 .card h3 {
     color: #667eea;
     margin-bottom: 0.5rem;
@@ -132,6 +140,12 @@ footer p {
 
 .offer-hero .card-icon {
     font-size: 5rem;
+}
+
+.offer-hero .card-image {
+    width: 300px;
+    max-width: 90%;
+    height: auto;
 }
 
 .offer-hero h2 {

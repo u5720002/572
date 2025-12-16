@@ -1,0 +1,11 @@
+<svg width="200" height="125" viewBox="0 0 200 125" xmlns="http://www.w3.org/2000/svg">
+  <!-- Amazon dark background -->
+  <rect width="200" height="125" rx="10" fill="#232F3E"/>
+  
+  <!-- Amazon text with smile -->
+  <text x="100" y="60" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle">amazon</text>
+  
+  <!-- Amazon smile arrow -->
+  <path d="M 60 75 Q 100 85 140 75" stroke="#FF9900" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <polygon points="140,75 135,72 138,78" fill="#FF9900"/>
+</svg>

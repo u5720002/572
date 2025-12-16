@@ -1,0 +1,15 @@
+<svg width="200" height="125" viewBox="0 0 200 125" xmlns="http://www.w3.org/2000/svg">
+  <!-- Google Pay white background -->
+  <rect width="200" height="125" rx="10" fill="white"/>
+  
+  <!-- Google colors G -->
+  <g transform="translate(70, 55)">
+    <circle cx="0" cy="0" r="18" fill="none" stroke="#4285F4" stroke-width="3" stroke-dasharray="28 28" stroke-dashoffset="14"/>
+    <circle cx="0" cy="0" r="18" fill="none" stroke="#34A853" stroke-width="3" stroke-dasharray="28 28" stroke-dashoffset="42"/>
+    <circle cx="0" cy="0" r="18" fill="none" stroke="#FBBC05" stroke-width="3" stroke-dasharray="28 28" stroke-dashoffset="70"/>
+    <circle cx="0" cy="0" r="18" fill="none" stroke="#EA4335" stroke-width="3" stroke-dasharray="28 28" stroke-dashoffset="0"/>
+  </g>
+  
+  <!-- Pay text -->
+  <text x="120" y="62" font-family="Arial, sans-serif" font-size="24" font-weight="500" fill="#5F6368">Pay</text>
+</svg>
