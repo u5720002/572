@@ -1,0 +1,13 @@
+<svg width="200" height="125" viewBox="0 0 200 125" xmlns="http://www.w3.org/2000/svg">
+  <!-- PayPal blue background -->
+  <rect width="200" height="125" rx="10" fill="#003087"/>
+  
+  <!-- PayPal P logo simplified -->
+  <g transform="translate(75, 35)">
+    <path d="M20 0 C35 0 45 10 45 25 C45 40 35 50 20 50 L10 50 L15 20 L15 0 Z" fill="white"/>
+    <path d="M10 15 L5 45 L0 45 L10 0 L15 0 L10 15 Z" fill="#009CDE"/>
+  </g>
+  
+  <!-- PayPal text -->
+  <text x="100" y="110" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">PayPal</text>
+</svg>

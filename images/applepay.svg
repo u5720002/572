@@ -1,0 +1,12 @@
+<svg width="200" height="125" viewBox="0 0 200 125" xmlns="http://www.w3.org/2000/svg">
+  <!-- Apple Pay black background -->
+  <rect width="200" height="125" rx="10" fill="#000000"/>
+  
+  <!-- Apple logo -->
+  <g transform="translate(70, 55)">
+    <path d="M 5 -15 Q 8 -18 12 -18 Q 10 -22 6 -22 Q 2 -22 0 -18 Q -2 -15 -2 -12 Q -10 -10 -15 -2 Q -18 5 -15 12 Q -12 18 -5 18 Q 0 18 5 12 L 10 12 Q 15 18 20 18 Q 27 18 30 12 Q 33 5 30 -2 Q 25 -10 17 -12 Q 17 -15 15 -18 Q 12 -22 8 -22 Q 5.5 -22 3.8 -20.5 Z" fill="white"/>
+  </g>
+  
+  <!-- Pay text -->
+  <text x="120" y="62" font-family="Arial, sans-serif" font-size="28" font-weight="300" fill="white">Pay</text>
+</svg>

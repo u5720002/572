@@ -1,0 +1,20 @@
+<svg width="200" height="125" viewBox="0 0 200 125" xmlns="http://www.w3.org/2000/svg">
+  <!-- Walmart blue background -->
+  <rect width="200" height="125" rx="10" fill="#0071CE"/>
+  
+  <!-- Walmart spark logo -->
+  <g transform="translate(100, 55)">
+    <!-- Center circle -->
+    <circle cx="0" cy="0" r="5" fill="#FFC220"/>
+    <!-- Six sparks -->
+    <polygon points="0,-20 -3,-8 3,-8" fill="#FFC220"/>
+    <polygon points="17.32,-10 9,3 12,9" fill="#FFC220"/>
+    <polygon points="17.32,10 9,-3 12,-9" fill="#FFC220"/>
+    <polygon points="0,20 -3,8 3,8" fill="#FFC220"/>
+    <polygon points="-17.32,10 -9,-3 -12,-9" fill="#FFC220"/>
+    <polygon points="-17.32,-10 -9,3 -12,9" fill="#FFC220"/>
+  </g>
+  
+  <!-- Walmart text -->
+  <text x="100" y="110" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">Walmart</text>
+</svg>
