@@ -1,8 +1,37 @@
+function generateRedeemCode() {
+    // Generate a random 16-character redeem code
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let code = '';
+    for (let i = 0; i < 16; i++) {
+        code += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    // Format as XXXX-XXXX-XXXX-XXXX
+    return code.match(/.{1,4}/g).join('-');
+}
+
 function claimGiftCard(type, amount) {
     const modal = document.getElementById('modal');
     const modalMessage = document.getElementById('modal-message');
     
-    modalMessage.innerHTML = `You've claimed a <strong>$${amount} ${type}</strong> gift card!<br>Check your email for redemption details.`;
+    // Generate redeem code
+    const redeemCode = generateRedeemCode();
+    const halfLength = Math.ceil(redeemCode.length / 2);
+    const visiblePart = redeemCode.substring(0, halfLength);
+    const hiddenPart = redeemCode.substring(halfLength);
+    
+    // Create obscured version of hidden part
+    const obscuredPart = hiddenPart.replace(/[A-Z0-9]/g, '●');
+    
+    modalMessage.innerHTML = `
+        You've claimed a <strong>$${amount} ${type}</strong> gift card!<br><br>
+        <div class="redeem-code-container">
+            <div class="redeem-code-label">Your Redeem Code:</div>
+            <div class="redeem-code">
+                <span class="code-visible">${visiblePart}</span><span class="code-hidden">${obscuredPart}</span>
+            </div>
+            <div class="redeem-code-note">Check your email for the complete code</div>
+        </div>
+    `;
     
     modal.style.display = 'block';
     
