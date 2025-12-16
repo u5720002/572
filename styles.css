@@ -95,7 +95,19 @@ main {
 
 .card p {
     color: #666;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.card .btn {
+    margin-top: 0.5rem;
+    display: block;
+    width: 100%;
+}
+
+.card .btn-promo {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    padding: 0.8rem 1.5rem;
 }
 
 .btn {
@@ -116,6 +128,30 @@ main {
 .btn-secondary {
     background: #6c757d;
     margin-top: 1rem;
+}
+
+.btn-promo {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    margin-top: 1.5rem;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+    animation: pulse 2s infinite;
+}
+
+.btn-promo:hover {
+    opacity: 1;
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
 }
 
 footer {
