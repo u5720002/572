@@ -1,9 +1,32 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
   <defs>
+    <!-- Enhanced 3-color blue gradient for depth -->
     <linearGradient id="venmoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#3D95CE;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#3589C0;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#2D7FB8;stop-opacity:1" />
     </linearGradient>
+    
+    <!-- Gradient for V lettermark with white to light blue -->
+    <linearGradient id="venmoVGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E0F2FF;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Enhanced shadow filter -->
+    <filter id="venmoShadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2.5"/>
+      <feOffset dx="0" dy="3" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.4"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Glow effect for V lettermark -->
     <filter id="venmoGlow">
       <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
       <feMerge>
@@ -12,10 +35,36 @@
       </feMerge>
     </filter>
   </defs>
-  <rect width="100" height="100" rx="20" fill="url(#venmoGrad)"/>
+  
+  <!-- Background with enhanced gradient and rounded corners -->
+  <rect width="100" height="100" rx="22" fill="url(#venmoGrad)" filter="url(#venmoShadow)"/>
+  
+  <!-- Decorative circles for visual interest -->
+  <circle cx="15" cy="15" r="8" fill="#FFFFFF" opacity="0.15"/>
+  <circle cx="85" cy="20" r="6" fill="#FFFFFF" opacity="0.2"/>
+  <circle cx="20" cy="80" r="5" fill="#FFFFFF" opacity="0.15"/>
+  <circle cx="85" cy="85" r="7" fill="#FFFFFF" opacity="0.1"/>
+  
+  <!-- Stylized V lettermark with gradient and glow -->
   <g filter="url(#venmoGlow)">
-    <path d="M 35 20 L 50 20 L 35 70 L 20 70 L 32 28 L 30 28 C 28 32 26 36 24 42 L 18 28 L 32 18 C 34 20 35 22 35 25 Z M 50 28 L 65 70 L 52 70 L 50 35 L 48 35 L 38 70 L 25 70 L 38 20 L 52 20 Z" fill="white"/>
+    <path d="M 30 25 L 42 25 L 50 65 L 58 25 L 70 25 L 58 75 L 42 75 Z" 
+          fill="url(#venmoVGrad)" 
+          stroke="rgba(255,255,255,0.3)" 
+          stroke-width="0.5"/>
   </g>
-  <circle cx="80" cy="20" r="6" fill="#FFFFFF" opacity="0.25"/>
-  <path d="M 15 85 Q 20 80 25 85" stroke="#FFFFFF" stroke-width="3" fill="none" opacity="0.2"/>
+  
+  <!-- Wave pattern decoration for payment theme -->
+  <path d="M 12 85 Q 17 80 22 85 Q 27 90 32 85" 
+        stroke="#FFFFFF" 
+        stroke-width="2.5" 
+        fill="none" 
+        opacity="0.25"
+        stroke-linecap="round"/>
+  
+  <!-- Shine overlay effect in corner -->
+  <ellipse cx="75" cy="25" rx="18" ry="12" fill="#FFFFFF" opacity="0.12" transform="rotate(-30 75 25)"/>
+  
+  <!-- Optional Venmo text at bottom -->
+  <text x="50" y="95" font-family="Arial, sans-serif" font-size="10" font-weight="bold" 
+        fill="rgba(255,255,255,0.8)" text-anchor="middle">Venmo</text>
 </svg>
