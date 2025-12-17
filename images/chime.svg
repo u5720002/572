@@ -1,5 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="15" fill="#00C853"/>
-  <circle cx="50" cy="50" r="25" fill="white"/>
-  <circle cx="50" cy="50" r="15" fill="#00C853"/>
+  <defs>
+    <linearGradient id="chimeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#21C064;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1BA854;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="chimeRadial">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  <rect width="100" height="100" rx="20" fill="url(#chimeGrad)"/>
+  <circle cx="50" cy="50" r="40" fill="url(#chimeRadial)"/>
+  <g>
+    <circle cx="50" cy="35" r="12" fill="white"/>
+    <path d="M 30 50 L 30 75 L 40 75 L 40 55 L 45 55 L 45 75 L 55 75 L 55 55 L 60 55 L 60 75 L 70 75 L 70 50 L 50 40 Z" fill="white"/>
+  </g>
+  <circle cx="85" cy="15" r="5" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="15" cy="85" r="4" fill="#FFFFFF" opacity="0.3"/>
 </svg>

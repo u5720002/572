@@ -1,4 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="15" fill="#0070BA"/>
-  <text x="50" y="60" font-family="Arial, sans-serif" font-size="35" font-weight="bold" fill="white" text-anchor="middle">PP</text>
+  <defs>
+    <linearGradient id="ppGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#003087;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#002570;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="ppGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#009CDE;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0079C1;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="20" fill="#FFFFFF"/>
+  <g transform="translate(20, 20)">
+    <path d="M 15 10 L 35 10 C 45 10 50 15 50 25 C 50 35 45 40 35 40 L 25 40 L 22 55 L 10 55 Z M 25 15 L 22 32 L 32 32 C 38 32 42 29 42 23 C 42 17 38 15 32 15 Z" fill="url(#ppGrad1)"/>
+    <path d="M 30 20 L 50 20 C 60 20 65 25 65 35 C 65 45 60 50 50 50 L 40 50 L 37 65 L 25 65 Z M 40 25 L 37 42 L 47 42 C 53 42 57 39 57 33 C 57 27 53 25 47 25 Z" fill="url(#ppGrad2)" opacity="0.9"/>
+  </g>
 </svg>
