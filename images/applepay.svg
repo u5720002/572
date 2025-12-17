@@ -1,46 +1,31 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
   <defs>
-    <!-- Sleek black gradient matching Apple products -->
     <linearGradient id="appleBg" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#1C1C1E;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1C1C1E;stop-opacity:1" />
     </linearGradient>
   </defs>
   
-  <!-- Black background -->
+  <!-- Background -->
   <rect width="100" height="100" rx="24" fill="url(#appleBg)"/>
   
-  <!-- Iconic Apple logo - authentic design with clear bite -->
-  <g transform="translate(50, 50) scale(1.8)">
-    <!-- Apple body - authentic Apple logo shape -->
-    <path d="M 0,-12 
-             C 4,-12 7,-10 8,-6 
-             C 9,-3 9,1 8,5 
-             C 7,9 5,12 2,14 
-             C 0,15 -2,15 -4,14 
-             C -7,12 -9,9 -10,5 
-             C -11,1 -11,-3 -10,-6 
-             C -9,-10 -6,-12 -2,-12 
-             Z" 
-          fill="#FFFFFF"/>
+  <!-- Simple, clean Apple logo -->
+  <g transform="translate(50, 42)">
+    <!-- Apple shape - simplified for clarity -->
+    <circle cx="0" cy="0" r="18" fill="#FFFFFF"/>
     
-    <!-- Bite mark - larger and more prominent -->
-    <circle cx="6" cy="-4" r="4.5" fill="url(#appleBg)"/>
+    <!-- Clear bite mark on the right -->
+    <circle cx="11" cy="-6" r="7" fill="url(#appleBg)"/>
     
-    <!-- Leaf - iconic curved leaf shape -->
-    <path d="M -1,-13 Q 1,-15 3,-13 Q 2,-11 0,-12 Z" 
-          fill="#FFFFFF"/>
-    
-    <!-- Stem -->
-    <rect x="-1" y="-14" width="2" height="2" fill="#FFFFFF"/>
+    <!-- Leaf at top -->
+    <ellipse cx="2" cy="-19" rx="4" ry="6" fill="#FFFFFF" transform="rotate(-30 2 -19)"/>
   </g>
   
-  <!-- "Pay" text with professional styling -->
-  <text x="50" y="78" 
+  <!-- Pay text -->
+  <text x="50" y="80" 
         text-anchor="middle"
-        font-family="SF Pro Display, -apple-system, BlinkMacSystemFont, sans-serif" 
-        font-size="18" 
-        font-weight="500" 
-        letter-spacing="0.5" 
+        font-family="Arial, sans-serif" 
+        font-size="16" 
+        font-weight="600" 
         fill="#FFFFFF">Pay</text>
 </svg>
