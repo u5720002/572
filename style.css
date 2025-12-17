@@ -442,6 +442,149 @@ header h1 {
     z-index: 2;
 }
 
+/* Money/Cash Pattern Background */
+.money-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%);
+    background-size: 30px 30px;
+    background-position: 0 0, 0 15px, 15px -15px, -15px 0px;
+    z-index: 1;
+}
+
+/* Money pattern with dollar sign motif */
+.money-pattern::after {
+    content: '$$$';
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    font-size: 3em;
+    font-weight: bold;
+    color: rgba(255,255,255,0.05);
+    letter-spacing: 10px;
+    z-index: 1;
+}
+
+/* Card Shine Effect */
+.card-shine {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        120deg,
+        transparent 0%,
+        transparent 40%,
+        rgba(255,255,255,0.3) 45%,
+        rgba(255,255,255,0.1) 50%,
+        transparent 55%,
+        transparent 100%
+    );
+    transform: rotate(20deg);
+    animation: shine 6s infinite;
+    z-index: 4;
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-200%) rotate(20deg);
+    }
+    50%, 100% {
+        transform: translateX(200%) rotate(20deg);
+    }
+}
+
+/* Card Chip Element */
+.card-chip {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 50px;
+    height: 35px;
+    background: linear-gradient(135deg, rgba(255,215,0,0.6) 0%, rgba(255,165,0,0.5) 100%);
+    border-radius: 6px;
+    border: 2px solid rgba(255,255,255,0.7);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+    z-index: 5;
+}
+
+.card-chip::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 70%;
+    background: repeating-linear-gradient(
+        90deg,
+        rgba(0,0,0,0.2) 0px,
+        rgba(0,0,0,0.2) 2px,
+        transparent 2px,
+        transparent 4px
+    );
+    border-radius: 3px;
+}
+
+/* Logo Glow Effect */
+.logo-glow {
+    filter: drop-shadow(0 0 8px rgba(147, 112, 219, 0.6)) drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    animation: logoGlow 3s ease-in-out infinite;
+}
+
+@keyframes logoGlow {
+    0%, 100% {
+        filter: drop-shadow(0 0 8px rgba(147, 112, 219, 0.6)) drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    }
+    50% {
+        filter: drop-shadow(0 0 15px rgba(147, 112, 219, 0.9)) drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+    }
+}
+
+/* Promotional Badges */
+.promo-badge {
+    position: absolute;
+    top: 15px;
+    left: -5px;
+    padding: 6px 15px;
+    font-size: 0.75em;
+    font-weight: bold;
+    border-radius: 0 8px 8px 0;
+    z-index: 10;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    color: white;
+    letter-spacing: 0.5px;
+    animation: badgePulse 2s infinite;
+}
+
+.promo-badge.hot-deal {
+    background: linear-gradient(135deg, #FF4500 0%, #FF6347 100%);
+}
+
+.promo-badge.limited-time {
+    background: linear-gradient(135deg, #FF1493 0%, #FF69B4 100%);
+}
+
+@keyframes badgePulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+}
+
 .card-header h3 {
     font-size: 1.5em;
     color: #333;
