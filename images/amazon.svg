@@ -1,107 +1,52 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
   <defs>
-    <!-- Vibrant Amazon orange gradient -->
+    <!-- Amazon vibrant orange gradient (signature brand color) -->
     <linearGradient id="amazonBg" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" style="stop-color:#FF9900;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#FF8C00;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FF8C00;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E88500;stop-opacity:1" />
     </linearGradient>
     
-    <!-- Dark gradient for text and smile -->
+    <!-- Dark color for smile -->
     <linearGradient id="amazonDark" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" style="stop-color:#232F3E;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#131A22;stop-opacity:1" />
     </linearGradient>
-    
-    <!-- Orange accent gradient -->
-    <linearGradient id="amazonOrange" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#FFBB00;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#FF9900;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#FFBB00;stop-opacity:1" />
-    </linearGradient>
-    
-    <!-- Shadow filter -->
-    <filter id="amazonShadow">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
-      <feOffset dx="0" dy="2"/>
-      <feComponentTransfer>
-        <feFuncA type="linear" slope="0.35"/>
-      </feComponentTransfer>
-      <feMerge>
-        <feMergeNode/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    
-    <!-- Glow effect -->
-    <filter id="amazonGlow">
-      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
   </defs>
   
-  <!-- Background with gradient -->
+  <!--Background with Amazon orange -->
   <rect width="100" height="100" rx="24" fill="url(#amazonBg)"/>
   
-  <!-- Decorative circles -->
-  <circle cx="18" cy="18" r="10" fill="#FFFFFF" opacity="0.08"/>
-  <circle cx="82" cy="82" r="12" fill="#FFFFFF" opacity="0.1"/>
-  <circle cx="75" cy="20" r="8" fill="#FFFFFF" opacity="0.12"/>
-  <circle cx="25" cy="80" r="7" fill="#FFFFFF" opacity="0.06"/>
-  
-  <!-- "amazon" lowercase text (authentic brand style) -->
-  <text x="50" y="42" 
-        font-family="Amazon Ember, Arial, sans-serif" 
-        font-size="24" 
+  <!-- "amazon" wordmark - clean, lowercase, bold -->
+  <text x="50" y="48" 
+        font-family="Amazon Ember, Arial Black, sans-serif" 
+        font-size="26" 
         font-weight="700" 
-        fill="url(#amazonDark)" 
+        letter-spacing="-0.5" 
         text-anchor="middle" 
-        filter="url(#amazonShadow)">amazon</text>
+        fill="#232F3E">amazon</text>
   
-  <!-- Iconic smile arrow (a to z) -->
-  <g filter="url(#amazonShadow)">
-    <!-- Smile curve -->
-    <path d="M 20 62 Q 50 72 80 62" 
-          stroke="url(#amazonDark)" 
-          stroke-width="4.5" 
+  <!-- Iconic smile arrow (a-to-z) - the signature Amazon element -->
+  <g>
+    <!-- Smile curve - smooth, authentic proportions -->
+    <path d="M 22 64 Q 50 75 78 64" 
+          stroke="#232F3E" 
+          stroke-width="5" 
           fill="none" 
-          stroke-linecap="round"
-          filter="url(#amazonGlow)"/>
+          stroke-linecap="round"/>
     
-    <!-- Arrow tip -->
-    <path d="M 74 60 L 82 62 L 77 67 Z" 
-          fill="url(#amazonDark)"/>
+    <!-- Arrow tip pointing right -->
+    <polygon points="72,62 80,64 75,69" fill="#232F3E"/>
   </g>
   
-  <!-- Wave patterns for movement -->
-  <path d="M 12 85 Q 17 80 22 85" 
-        stroke="#232F3E" 
-        stroke-width="2" 
-        fill="none" 
-        opacity="0.2" 
-        stroke-linecap="round"/>
-  <path d="M 68 85 Q 73 80 78 85" 
-        stroke="#232F3E" 
-        stroke-width="2" 
-        fill="none" 
-        opacity="0.2" 
-        stroke-linecap="round"/>
-  
-  <!-- Card chip decoration -->
-  <g transform="translate(72, 12)">
-    <rect width="16" height="13" rx="2" fill="url(#amazonOrange)" opacity="0.5"/>
-    <rect x="2" y="2" width="12" height="9" rx="1" fill="#FF9900" opacity="0.6"/>
-    <line x1="4" y1="3" x2="4" y2="10" stroke="#FF8800" stroke-width="0.5" opacity="0.6"/>
-    <line x1="7" y1="3" x2="7" y2="10" stroke="#FF8800" stroke-width="0.5" opacity="0.6"/>
-    <line x1="11" y1="3" x2="11" y2="10" stroke="#FF8800" stroke-width="0.5" opacity="0.6"/>
-    <line x1="14" y1="3" x2="14" y2="10" stroke="#FF8800" stroke-width="0.5" opacity="0.6"/>
+  <!-- Box/package icon (top right corner) - subtle -->
+  <g transform="translate(76, 18)" opacity="0.3">
+    <rect x="-6" y="-6" width="12" height="12" rx="1" stroke="#232F3E" stroke-width="2" fill="none"/>
+    <line x1="-6" y1="-6" x2="6" y2="6" stroke="#232F3E" stroke-width="1.5"/>
+    <line x1="6" y1="-6" x2="-6" y2="6" stroke="#232F3E" stroke-width="1.5"/>
   </g>
   
-  <!-- Accent stripe -->
-  <rect x="10" y="78" width="80" height="2.5" fill="url(#amazonOrange)" opacity="0.35"/>
-  
-  <!-- Shine overlay -->
-  <ellipse cx="25" cy="20" rx="18" ry="14" fill="#FFFFFF" opacity="0.12"/>
+  <!-- Minimal decoration - subtle circles -->
+  <circle cx="18" cy="22" r="5" fill="#FFFFFF" opacity="0.08"/>
+  <circle cx="88" cy="82" r="6" fill="#FFFFFF" opacity="0.1"/>
 </svg>
