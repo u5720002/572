@@ -324,20 +324,6 @@ header h1 {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Emoji Logo Styles */
-.emoji-logo {
-    font-size: 42px;
-    display: inline-block;
-    line-height: 1;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-.emoji-brand-logo {
-    font-size: 64px;
-    line-height: 1;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-}
-
 /* Gift Card Visual Mockup */
 .gift-card-visual {
     width: 100%;
@@ -377,8 +363,7 @@ header h1 {
     z-index: 2;
 }
 
-.gift-card-visual .card-brand-logo,
-.gift-card-visual .emoji-brand-logo {
+.gift-card-visual .card-brand-logo {
     position: absolute;
     bottom: 15px;
     left: 15px;
@@ -668,14 +653,12 @@ header h1 {
 }
 
 /* Photo-Realistic Logo Enhancement */
-.card-logo,
-.emoji-logo {
+.card-logo {
     filter: contrast(1.1) brightness(1.05);
     transition: all 0.3s ease;
 }
 
-.card-logo:hover,
-.emoji-logo:hover {
+.card-logo:hover {
     transform: scale(1.1) rotate(5deg);
     filter: contrast(1.2) brightness(1.1) saturate(1.2);
 }
