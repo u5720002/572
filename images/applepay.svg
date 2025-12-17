@@ -1,29 +1,53 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
-  <!-- Pure black background matching official Apple Pay -->
-  <rect width="100" height="100" rx="24" fill="#000000"/>
+  <!-- Modern gradient background - sleek black to dark gray -->
+  <defs>
+    <linearGradient id="applePayBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1a1a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="appleGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e0e0e0;stop-opacity:1" />
+    </linearGradient>
+    <!-- Shadow filter for depth -->
+    <filter id="appleShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
   
-  <!-- Iconic Apple logo - authentic design with clearly visible bite -->
-  <g transform="translate(50, 32)">
-    <!-- Main apple body - rounded apple shape -->
-    <path d="M -2,-18 C 4,-20 10,-18 13,-12 C 16,-6 16,2 14,8 C 12,14 8,18 2,18 C -4,18 -10,16 -13,10 C -16,4 -16,-4 -13,-10 C -10,-16 -6,-18 -2,-18 Z" 
-          fill="#FFFFFF"/>
+  <!-- Background with smooth rounded corners -->
+  <rect width="100" height="100" rx="24" fill="url(#applePayBg)"/>
+  
+  <!-- Decorative subtle shine effect -->
+  <rect x="5" y="5" width="90" height="40" rx="20" fill="url(#appleGlow)" opacity="0.03"/>
+  
+  <!-- Modern Apple logo design with bold styling -->
+  <g transform="translate(50, 35)" filter="url(#appleShadow)">
+    <!-- Apple body with smooth curves -->
+    <path d="M 0,-16 C 6,-18 12,-16 15,-10 C 18,-4 18,4 15,10 C 12,16 6,20 0,20 C -6,20 -12,16 -15,10 C -18,4 -18,-4 -15,-10 C -12,-16 -6,-18 0,-16 Z" 
+          fill="url(#appleGlow)"/>
     
-    <!-- Clear bite mark on right side (signature Apple element) -->
-    <ellipse cx="10" cy="-2" rx="5.5" ry="8" fill="#000000"/>
+    <!-- Prominent bite mark - iconic Apple design element -->
+    <circle cx="12" cy="0" r="7" fill="#000000"/>
     
-    <!-- Small stem/leaf at top -->
-    <g transform="translate(0, -18)">
-      <path d="M 0,0 Q 2,-3 4,-2" stroke="#FFFFFF" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-      <path d="M 2,-2 Q 3,-1 5,0" fill="#FFFFFF"/>
+    <!-- Elegant leaf detail -->
+    <g transform="translate(1, -17)">
+      <ellipse cx="0" cy="0" rx="3" ry="4" fill="url(#appleGlow)" transform="rotate(-25)"/>
     </g>
   </g>
   
-  <!-- "Apple Pay" text for clear brand identification -->
-  <text x="50" y="75" 
+  <!-- "Pay" text in modern bold style -->
+  <text x="50" y="72" 
         text-anchor="middle"
-        font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', Arial, sans-serif" 
-        font-size="13" 
-        font-weight="600" 
-        letter-spacing="0.3"
-        fill="#FFFFFF">Apple Pay</text>
+        font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif" 
+        font-size="16" 
+        font-weight="700" 
+        letter-spacing="0.5"
+        fill="#FFFFFF">Pay</text>
+  
+  <!-- Contactless payment waves - subtle modern touch -->
+  <g transform="translate(72, 25)" opacity="0.4">
+    <path d="M 0,0 Q 2,-3 4,0" stroke="#FFFFFF" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <path d="M 0,5 Q 3,-1 6,5" stroke="#FFFFFF" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  </g>
 </svg>
