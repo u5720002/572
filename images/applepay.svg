@@ -1,55 +1,116 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
   <defs>
-    <linearGradient id="appleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#1C1C1C;stop-opacity:1" />
+    <!-- 3-color black gradient background -->
+    <linearGradient id="appleGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A1A1A;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#0F0F0F;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#050505;stop-opacity:1" />
     </linearGradient>
+    
+    <!-- White-to-light-gray gradient for Apple logo -->
+    <linearGradient id="appleLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F0F0F0;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Silver gradient for accents -->
+    <linearGradient id="silverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#C0C0C0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#A8A8A8;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Enhanced shadow filter -->
     <filter id="appleShadow">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
-      <feOffset dx="0" dy="2" result="offsetblur"/>
-      <feFlood flood-color="#000000" flood-opacity="0.3"/>
-      <feComposite in2="offsetblur" operator="in"/>
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2.5"/>
+      <feOffset dx="0" dy="3" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.4"/>
+      </feComponentTransfer>
       <feMerge>
         <feMergeNode/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
+    
+    <!-- Glow filter -->
+    <filter id="appleGlow">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
   
-  <!-- Background -->
-  <rect width="100" height="100" rx="20" fill="url(#appleGrad)"/>
+  <!-- Background with rounded corners -->
+  <rect width="100" height="100" rx="22" fill="url(#appleGrad)"/>
   
-  <!-- Authentic Apple Logo with bite -->
-  <g transform="translate(20, 20)" filter="url(#appleShadow)">
-    <!-- Apple shape with realistic bite -->
-    <path d="M 20 8 C 20 5 22 3 24 2 C 23 1 21 0 19 0 C 16 0 14 2 14 5 C 14 8 16 10 18 12 C 18 12 18 11 18 10 C 18 9 19 8 20 8 Z" fill="#FFFFFF"/>
-    <path d="M 28 5 C 28 2.5 26 0.5 23.5 0 C 23 0 22.5 0 22 0 C 19 0 16 2 16 6 C 16 8 17 10 18 11 C 20 13 22 14 24 14 C 28 14 30 11 30 8 C 30 6 29 5 28 5 Z M 26 8 C 26 8.5 26 9 25.5 9.5 C 25 10 24 10 23 10 C 22 10 21 9.5 20.5 9 C 20 8.5 20 8 20 7 C 20 6 20.5 5 21 4.5 C 21.5 4 22.5 4 23.5 4 C 24 4 24.5 4.5 25 5 C 25.5 5.5 26 6.5 26 8 Z" fill="#FFFFFF"/>
+  <!-- Decorative circles -->
+  <circle cx="15" cy="15" r="20" fill="#FFFFFF" opacity="0.03"/>
+  <circle cx="85" cy="85" r="25" fill="#FFFFFF" opacity="0.02"/>
+  <circle cx="75" cy="25" r="15" fill="#FFFFFF" opacity="0.04"/>
+  
+  <!-- Enhanced Apple logo with bite -->
+  <g transform="translate(25, 25)" filter="url(#appleShadow)">
+    <!-- Main apple body with gradient fill -->
+    <path d="M 25 5 C 25 5 30 5 32 8 C 34 11 35 15 35 20 C 35 25 33 30 30 33 C 27 36 22 38 17 38 C 12 38 7 36 4 33 C 1 30 0 25 0 20 C 0 15 1 11 3 8 C 5 5 10 5 10 5 C 10 5 8 3 8 0 C 8 -3 10 -5 13 -5 C 16 -5 18 -3 18 0 C 18 3 16 5 16 5 C 16 5 20 5 25 5 Z" 
+          fill="url(#appleLogoGrad)" 
+          stroke="rgba(255,255,255,0.3)" 
+          stroke-width="0.8"
+          filter="url(#appleGlow)"/>
     
-    <!-- Leaf on top of apple -->
-    <ellipse cx="24" cy="1.5" rx="2" ry="3" fill="#FFFFFF" transform="rotate(-20 24 1.5)"/>
+    <!-- Bite mark - realistic curved indentation -->
+    <path d="M 28 18 C 28 18 30 16 32 16 C 34 16 35 17 35 19 C 35 21 34 23 32 24 C 30 25 28 24 28 24 C 28 24 29 21 29 19.5 C 29 18 28 18 28 18 Z" 
+          fill="url(#appleGrad)"/>
+    
+    <!-- Leaf detail on stem -->
+    <ellipse cx="17" cy="-3" rx="3" ry="5" fill="url(#appleLogoGrad)" 
+             transform="rotate(-25 17 -3)" opacity="0.95"/>
   </g>
   
-  <!-- "Pay" text with Apple's San Francisco font style -->
-  <text x="55" y="35" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="14" font-weight="500" fill="#FFFFFF" text-anchor="start">Pay</text>
+  <!-- "Pay" text with enhanced styling -->
+  <text x="63" y="45" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" 
+        font-size="18" font-weight="600" fill="url(#appleLogoGrad)" 
+        filter="url(#appleShadow)">Pay</text>
   
-  <!-- Contactless payment icon -->
-  <g transform="translate(15, 55)">
-    <path d="M 8 0 C 8 0 10 2 10 5 C 10 8 8 10 8 10" stroke="#FFFFFF" stroke-width="1.5" fill="none" opacity="0.8"/>
-    <path d="M 12 0 C 12 0 16 3 16 8 C 16 13 12 16 12 16" stroke="#FFFFFF" stroke-width="1.5" fill="none" opacity="0.6"/>
-    <path d="M 16 0 C 16 0 22 4 22 11 C 22 18 16 22 16 22" stroke="#FFFFFF" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <!-- Wave patterns for payment flow theme -->
+  <g opacity="0.15">
+    <path d="M 12 88 Q 17 83 22 88 Q 27 93 32 88" 
+          stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M 40 88 Q 45 83 50 88 Q 55 93 60 88" 
+          stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linecap="round"/>
   </g>
   
-  <!-- Card icon -->
-  <g transform="translate(50, 55)">
-    <rect x="0" y="0" width="35" height="22" rx="3" fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity="0.7"/>
-    <rect x="0" y="5" width="35" height="4" fill="#FFFFFF" opacity="0.5"/>
-    <rect x="3" y="13" width="12" height="3" rx="1" fill="#FFFFFF" opacity="0.7"/>
+  <!-- Contactless payment waves -->
+  <g transform="translate(70, 65)" opacity="0.25">
+    <path d="M 0 0 Q 2 -2 4 0 Q 6 2 8 0" 
+          stroke="#FFFFFF" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <path d="M 0 5 Q 3 2 6 5 Q 9 8 12 5" 
+          stroke="#FFFFFF" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <path d="M 0 10 Q 4 6 8 10 Q 12 14 16 10" 
+          stroke="#FFFFFF" stroke-width="1.8" fill="none" stroke-linecap="round"/>
   </g>
   
-  <!-- Security badge/checkmark -->
-  <circle cx="85" cy="20" r="8" fill="#34C759" opacity="0.9"/>
-  <path d="M 81 20 L 84 23 L 89 17" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Silver accent stripes (minimalist design) -->
+  <rect x="8" y="70" width="84" height="1.5" fill="url(#silverGrad)" opacity="0.2" rx="0.75"/>
+  <rect x="8" y="78" width="84" height="1.5" fill="url(#silverGrad)" opacity="0.15" rx="0.75"/>
   
-  <!-- Decorative gradient overlay for depth -->
-  <rect width="100" height="100" rx="20" fill="url(#appleGrad)" opacity="0.1"/>
+  <!-- Shine overlay effect (top-right corner) -->
+  <circle cx="78" cy="22" r="12" fill="#FFFFFF" opacity="0.08"/>
+  
+  <!-- Card chip decoration (bottom-right) -->
+  <g transform="translate(72, 82)">
+    <rect x="0" y="0" width="15" height="12" rx="2" fill="url(#silverGrad)" opacity="0.25"/>
+    <rect x="2" y="2" width="11" height="8" rx="1" fill="#000000" opacity="0.3"/>
+    <line x1="3" y1="4" x2="12" y2="4" stroke="url(#silverGrad)" stroke-width="0.5" opacity="0.4"/>
+    <line x1="3" y1="6" x2="12" y2="6" stroke="url(#silverGrad)" stroke-width="0.5" opacity="0.4"/>
+    <line x1="3" y1="8" x2="12" y2="8" stroke="url(#silverGrad)" stroke-width="0.5" opacity="0.4"/>
+  </g>
+  
+  <!-- Security checkmark badge -->
+  <g transform="translate(12, 12)">
+    <circle cx="0" cy="0" r="7" fill="#34C759" opacity="0.9"/>
+    <path d="M -3 0 L -1 2 L 3 -3" stroke="#FFFFFF" stroke-width="1.8" fill="none" 
+          stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
 </svg>
