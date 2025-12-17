@@ -550,6 +550,119 @@ header h1 {
     }
 }
 
+/* Real-Time Logo Container */
+.logo-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Live Badge for Real-Time Indicator */
+.live-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%);
+    color: white;
+    font-size: 0.5em;
+    font-weight: bold;
+    padding: 3px 6px;
+    border-radius: 8px;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(255, 0, 0, 0.4);
+    animation: livePulse 1.5s ease-in-out infinite;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.3px;
+}
+
+@keyframes livePulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 2px 8px rgba(255, 0, 0, 0.4);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 2px 12px rgba(255, 0, 0, 0.6), 0 0 20px rgba(255, 0, 0, 0.3);
+    }
+}
+
+/* Enhanced Real-Time Logo */
+.logo-realtime {
+    position: relative;
+    border: 2px solid rgba(147, 112, 219, 0.3);
+    background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(240,240,255,0.9) 100%);
+    padding: 5px;
+    transition: all 0.3s ease;
+}
+
+.logo-realtime::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, 
+        rgba(147, 112, 219, 0.6),
+        rgba(102, 126, 234, 0.6),
+        rgba(147, 112, 219, 0.6));
+    border-radius: 10px;
+    z-index: -1;
+    animation: borderRotate 3s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.logo-realtime:hover::before {
+    opacity: 1;
+}
+
+@keyframes borderRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.logo-realtime::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(120deg, 
+        transparent 0%, 
+        rgba(255,255,255,0.4) 45%, 
+        rgba(255,255,255,0.8) 50%, 
+        rgba(255,255,255,0.4) 55%, 
+        transparent 100%);
+    transform: translateX(-100%);
+    animation: logoShine 4s ease-in-out infinite;
+    border-radius: 10px;
+}
+
+@keyframes logoShine {
+    0%, 100% {
+        transform: translateX(-100%);
+    }
+    50% {
+        transform: translateX(100%);
+    }
+}
+
+/* Photo-Realistic Logo Enhancement */
+.card-logo {
+    filter: contrast(1.1) brightness(1.05);
+    transition: all 0.3s ease;
+}
+
+.card-logo:hover {
+    transform: scale(1.1) rotate(5deg);
+    filter: contrast(1.2) brightness(1.1) saturate(1.2);
+}
+
 /* Promotional Badges */
 .promo-badge {
     position: absolute;
