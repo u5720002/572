@@ -99,8 +99,8 @@
     <line x1="77" y1="75" x2="77" y2="83" stroke="#008030" stroke-width="0.5" opacity="0.5"/>
     <line x1="81" y1="75" x2="81" y2="83" stroke="#008030" stroke-width="0.5" opacity="0.5"/>
     <line x1="85" y1="75" x2="85" y2="83" stroke="#008030" stroke-width="0.5" opacity="0.5"/>
-    <line x1="75" y1="77" x2="87" y1="77" stroke="#008030" stroke-width="0.5" opacity="0.5"/>
-    <line x1="75" y1="81" x2="87" y1="81" stroke="#008030" stroke-width="0.5" opacity="0.5"/>
+    <line x1="75" y1="77" x2="87" y2="77" stroke="#008030" stroke-width="0.5" opacity="0.5"/>
+    <line x1="75" y1="81" x2="87" y2="81" stroke="#008030" stroke-width="0.5" opacity="0.5"/>
   </g>
   
   <!-- Multiple shine effects for premium look -->
