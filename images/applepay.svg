@@ -4,12 +4,52 @@
       <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#1C1C1C;stop-opacity:1" />
     </linearGradient>
+    <filter id="appleShadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+      <feOffset dx="0" dy="2" result="offsetblur"/>
+      <feFlood flood-color="#000000" flood-opacity="0.3"/>
+      <feComposite in2="offsetblur" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
+  
+  <!-- Background -->
   <rect width="100" height="100" rx="20" fill="url(#appleGrad)"/>
-  <g transform="translate(30, 25)">
-    <path d="M 25 0 C 23 0 21 1 20 3 C 19 1 17 0 15 0 C 11 0 8 3 8 8 C 8 14 13 19 20 25 C 27 19 32 14 32 8 C 32 3 29 0 25 0 Z M 28 7 L 30 5 C 31 4 31 2 30 1 C 29 0 27 0 26 1 L 23 4 L 20 1 C 19 0 17 0 16 1 C 15 2 15 4 16 5 L 18 7" fill="#FFFFFF"/>
-    <path d="M 5 15 C 4 15 3 16 3 18 C 3 20 4 21 6 21 L 14 21 C 15 21 16 20 16 18 C 16 16 15 15 14 15 C 13 15 13 16 12 16 L 8 16 C 7 16 6 15 5 15 Z" fill="#FFFFFF"/>
+  
+  <!-- Authentic Apple Logo with bite -->
+  <g transform="translate(20, 20)" filter="url(#appleShadow)">
+    <!-- Apple shape with realistic bite -->
+    <path d="M 20 8 C 20 5 22 3 24 2 C 23 1 21 0 19 0 C 16 0 14 2 14 5 C 14 8 16 10 18 12 C 18 12 18 11 18 10 C 18 9 19 8 20 8 Z" fill="#FFFFFF"/>
+    <path d="M 28 5 C 28 2.5 26 0.5 23.5 0 C 23 0 22.5 0 22 0 C 19 0 16 2 16 6 C 16 8 17 10 18 11 C 20 13 22 14 24 14 C 28 14 30 11 30 8 C 30 6 29 5 28 5 Z M 26 8 C 26 8.5 26 9 25.5 9.5 C 25 10 24 10 23 10 C 22 10 21 9.5 20.5 9 C 20 8.5 20 8 20 7 C 20 6 20.5 5 21 4.5 C 21.5 4 22.5 4 23.5 4 C 24 4 24.5 4.5 25 5 C 25.5 5.5 26 6.5 26 8 Z" fill="#FFFFFF"/>
+    
+    <!-- Leaf on top of apple -->
+    <ellipse cx="24" cy="1.5" rx="2" ry="3" fill="#FFFFFF" transform="rotate(-20 24 1.5)"/>
   </g>
-  <text x="50" y="75" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="16" font-weight="500" fill="#FFFFFF" text-anchor="middle">Pay</text>
-  <circle cx="85" cy="15" r="4" fill="#FFFFFF" opacity="0.2"/>
+  
+  <!-- "Pay" text with Apple's San Francisco font style -->
+  <text x="55" y="35" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="14" font-weight="500" fill="#FFFFFF" text-anchor="start">Pay</text>
+  
+  <!-- Contactless payment icon -->
+  <g transform="translate(15, 55)">
+    <path d="M 8 0 C 8 0 10 2 10 5 C 10 8 8 10 8 10" stroke="#FFFFFF" stroke-width="1.5" fill="none" opacity="0.8"/>
+    <path d="M 12 0 C 12 0 16 3 16 8 C 16 13 12 16 12 16" stroke="#FFFFFF" stroke-width="1.5" fill="none" opacity="0.6"/>
+    <path d="M 16 0 C 16 0 22 4 22 11 C 22 18 16 22 16 22" stroke="#FFFFFF" stroke-width="1.5" fill="none" opacity="0.4"/>
+  </g>
+  
+  <!-- Card icon -->
+  <g transform="translate(50, 55)">
+    <rect x="0" y="0" width="35" height="22" rx="3" fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity="0.7"/>
+    <rect x="0" y="5" width="35" height="4" fill="#FFFFFF" opacity="0.5"/>
+    <rect x="3" y="13" width="12" height="3" rx="1" fill="#FFFFFF" opacity="0.7"/>
+  </g>
+  
+  <!-- Security badge/checkmark -->
+  <circle cx="85" cy="20" r="8" fill="#34C759" opacity="0.9"/>
+  <path d="M 81 20 L 84 23 L 89 17" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Decorative gradient overlay for depth -->
+  <rect width="100" height="100" rx="20" fill="url(#appleGrad)" opacity="0.1"/>
 </svg>
