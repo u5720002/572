@@ -10,34 +10,37 @@
   <!-- Black background -->
   <rect width="100" height="100" rx="24" fill="url(#appleBg)"/>
   
-  <!-- Apple logo - simplified, clearer design -->
-  <g transform="translate(25, 45)">
-    <!-- Apple body - cleaner, more recognizable shape -->
-    <path d="M 15,0 C 20,0 24,4 24,10 C 24,16 20,24 15,28 C 10,24 6,16 6,10 C 6,4 10,0 15,0 Z" 
+  <!-- Iconic Apple logo - authentic design with clear bite -->
+  <g transform="translate(50, 50) scale(1.8)">
+    <!-- Apple body - authentic Apple logo shape -->
+    <path d="M 0,-12 
+             C 4,-12 7,-10 8,-6 
+             C 9,-3 9,1 8,5 
+             C 7,9 5,12 2,14 
+             C 0,15 -2,15 -4,14 
+             C -7,12 -9,9 -10,5 
+             C -11,1 -11,-3 -10,-6 
+             C -9,-10 -6,-12 -2,-12 
+             Z" 
           fill="#FFFFFF"/>
     
-    <!-- Bite mark - clearer, more visible -->
-    <circle cx="21" cy="10" r="5" fill="url(#appleBg)"/>
+    <!-- Bite mark - larger and more prominent -->
+    <circle cx="6" cy="-4" r="4.5" fill="url(#appleBg)"/>
+    
+    <!-- Leaf - iconic curved leaf shape -->
+    <path d="M -1,-13 Q 1,-15 3,-13 Q 2,-11 0,-12 Z" 
+          fill="#FFFFFF"/>
     
     <!-- Stem -->
-    <rect x="13.5" y="-4" width="3" height="5" rx="1.5" fill="#FFFFFF"/>
-    
-    <!-- Leaf - simpler, clearer -->
-    <ellipse cx="17" cy="-2" rx="3" ry="2" fill="#FFFFFF" transform="rotate(20 17 -2)"/>
+    <rect x="-1" y="-14" width="2" height="2" fill="#FFFFFF"/>
   </g>
   
-  <!-- "Pay" text -->
-  <text x="50" y="52" 
+  <!-- "Pay" text with professional styling -->
+  <text x="50" y="78" 
+        text-anchor="middle"
         font-family="SF Pro Display, -apple-system, BlinkMacSystemFont, sans-serif" 
-        font-size="22" 
-        font-weight="600" 
-        letter-spacing="-1" 
+        font-size="18" 
+        font-weight="500" 
+        letter-spacing="0.5" 
         fill="#FFFFFF">Pay</text>
-  
-  <!-- Contactless waves - clearer -->
-  <g transform="translate(72, 72)" opacity="0.3">
-    <path d="M 0,0 Q 2,-2 4,0" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <path d="M -1,4 Q 2,2 5,4" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <path d="M -2,8 Q 2,6 6,8" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round"/>
-  </g>
 </svg>
