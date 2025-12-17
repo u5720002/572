@@ -1,25 +1,67 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
   <defs>
     <linearGradient id="cashGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#00D54B;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#00B83E;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#00D64D;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#00C244;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00AB3B;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="dollarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E0FFE0;stop-opacity:1" />
     </linearGradient>
     <filter id="cashShadow">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
-      <feOffset dx="0" dy="2" result="offsetblur"/>
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2.5"/>
+      <feOffset dx="0" dy="3" result="offsetblur"/>
       <feComponentTransfer>
-        <feFuncA type="linear" slope="0.3"/>
+        <feFuncA type="linear" slope="0.4"/>
       </feComponentTransfer>
       <feMerge>
         <feMergeNode/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
-  <rect width="100" height="100" rx="20" fill="url(#cashGrad)"/>
+  
+  <!-- Background with rounded corners -->
+  <rect width="100" height="100" rx="22" fill="url(#cashGrad)"/>
+  
+  <!-- Decorative elements -->
+  <circle cx="82" cy="18" r="10" fill="#FFFFFF" opacity="0.15"/>
+  <circle cx="18" cy="82" r="8" fill="#FFFFFF" opacity="0.12"/>
+  <circle cx="88" cy="70" r="6" fill="#FFFFFF" opacity="0.1"/>
+  
+  <!-- Enhanced dollar sign with glow -->
   <g filter="url(#cashShadow)">
-    <path d="M 52 25 L 55 25 C 62 25 67 30 67 37 C 67 40 65 43 62 45 L 59 47 C 62 48 64 51 64 55 C 64 62 58 67 51 67 L 48 67 L 48 75 L 42 75 L 42 67 L 38 67 L 38 61 L 42 61 L 42 39 L 38 39 L 38 33 L 42 33 L 42 25 L 48 25 L 48 33 L 52 33 Z M 48 39 L 48 45 L 52 45 C 55 45 57 43 57 41 C 57 39 55 39 52 39 Z M 48 51 L 48 61 L 52 61 C 55 61 58 59 58 56 C 58 53 55 51 52 51 Z" fill="white"/>
+    <!-- Dollar sign vertical line -->
+    <rect x="47" y="22" width="6" height="56" rx="3" fill="url(#dollarGrad)"/>
+    
+    <!-- Top curve of $ -->
+    <path d="M 35 32 Q 35 27 40 25 L 60 25 Q 65 27 65 32 Q 65 37 60 39 L 40 39 Q 37 38 36 35" 
+          fill="url(#dollarGrad)" stroke="#00AB3B" stroke-width="0.5"/>
+    
+    <!-- Bottom curve of $ -->
+    <path d="M 35 68 Q 35 73 40 75 L 60 75 Q 65 73 65 68 Q 65 63 60 61 L 40 61 Q 37 62 36 65" 
+          fill="url(#dollarGrad)" stroke="#00AB3B" stroke-width="0.5"/>
+    
+    <!-- Middle connector -->
+    <rect x="40" y="39" width="25" height="22" fill="url(#dollarGrad)" opacity="0.9"/>
+    
+    <!-- Enhanced S shape -->
+    <path d="M 38 34 C 38 29 42 26 50 26 C 58 26 62 29 62 34 C 62 38 59 40 54 42 L 46 45 C 41 47 38 50 38 55 C 38 60 41 63 46 65 L 54 65 C 59 63 62 60 62 55 M 50 22 L 50 78" 
+          stroke="url(#dollarGrad)" stroke-width="7" fill="none" stroke-linecap="round" filter="url(#glow)"/>
   </g>
-  <circle cx="85" cy="15" r="8" fill="#FFFFFF" opacity="0.3"/>
-  <circle cx="15" cy="85" r="6" fill="#FFFFFF" opacity="0.2"/>
+  
+  <!-- Shine effect overlay -->
+  <path d="M 15 15 Q 30 15 40 25 L 25 40 Q 15 30 15 15" fill="#FFFFFF" opacity="0.2"/>
+  
+  <!-- Brand name text (optional small) -->
+  <text x="50" y="92" font-family="Arial, sans-serif" font-size="8" font-weight="bold" 
+        text-anchor="middle" fill="#FFFFFF" opacity="0.6">Cash App</text>
 </svg>
