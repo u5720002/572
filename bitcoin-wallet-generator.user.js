@@ -1,17 +1,15 @@
 // ==UserScript==
 // @name         Bitcoin Real Wallet Address Generator with TrustWallet Balance
 // @namespace    http://tampermonkey.net/
-// @version      1.0.1
+// @version      1.0.3
 // @description  Generate real Bitcoin wallet addresses with backup codes and check balance on TrustWallet
 // @author       u5720002
 // @match        *://*/*
 // @grant        GM_xmlhttpRequest
 // @grant        GM_addStyle
-// @grant        GM_setClipboard
-// @require      https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js
-// @require      https://cdn.jsdelivr.net/npm/bip39@3.0.4/dist/bip39.min.js
-// @require      https://cdn.jsdelivr.net/npm/bitcoinjs-lib@5.2.0/dist/bitcoinjs-lib.min.js
-// @require      https://cdn.jsdelivr.net/npm/bip32@2.0.6/dist/index.umd.min.js
+// @require      https://bundle.run/bip39@3.0.4
+// @require      https://bundle.run/bitcoinjs-lib@5.2.0
+// @require      https://bundle.run/bip32@2.0.6
 // @run-at       document-end
 // ==/UserScript==
 
@@ -197,7 +195,7 @@
         document.getElementById('check-balance').addEventListener('click', checkBalance);
     }
 
-    // Helper function to attach event listeners to copy buttons
+    // Helper function to attach event listeners to copy buttons (more secure than inline onclick)
     function attachCopyListeners() {
         const copyButtons = document.querySelectorAll('.copy-btn[data-copy]');
         copyButtons.forEach(button => {
@@ -243,8 +241,7 @@
             output.innerHTML = '<div class="loading">⏳ Generating wallet...</div>';
 
             // Generate mnemonic (backup code/seed phrase)
-            // 256 bits of entropy generates a 24-word mnemonic for maximum security
-            const mnemonic = bip39.generateMnemonic(256);
+            const mnemonic = bip39.generateMnemonic(256); // 24 words for maximum security
             
             // Generate seed from mnemonic
             const seed = bip39.mnemonicToSeedSync(mnemonic);
