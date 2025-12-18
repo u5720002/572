@@ -211,8 +211,16 @@ function submitReview(event) {
     event.preventDefault();
     
     const name = document.getElementById('review-name').value;
-    const rating = document.querySelector('input[name="rating"]:checked').value;
+    const ratingElement = document.querySelector('input[name="rating"]:checked');
     const comment = document.getElementById('review-comment').value;
+    
+    // Validate rating is selected
+    if (!ratingElement) {
+        alert('Please select a rating before submitting your review.');
+        return false;
+    }
+    
+    const rating = ratingElement.value;
     
     // Close the review modal
     closeReviewModal();
@@ -234,6 +242,7 @@ function submitReview(event) {
     `;
     
     modal.style.display = 'block';
+    return false;
 }
 
 // Close review modal when clicking outside of it
