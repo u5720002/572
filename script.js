@@ -32,7 +32,7 @@ function claimGiftCard(type, amount) {
             <div class="redeem-code" id="redeem-code-display">
                 <span class="code-visible">${visiblePart}</span><span class="code-hidden">${obscuredPart}</span>
             </div>
-            <div class="redeem-code-note">🔥Human Verify For Complete Code🎁</div>
+            <div class="redeem-code-note">👉Click Continue.<br>✔Complete the task.<br>💳Wait 10 minutes to receive your valid card.</div>
         </div>
     `;
     
