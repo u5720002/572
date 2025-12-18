@@ -320,7 +320,35 @@
             path: "m/44'/0'/0'/0/0" // BIP44 standard path for Bitcoin
         };
 
+        let librariesLoaded = false;
+
+        // Wait for libraries to load
+        function waitForLibraries() {
+            return new Promise((resolve) => {
+                const checkInterval = setInterval(() => {
+                    if (typeof bip39 !== 'undefined' && typeof bitcoinjs !== 'undefined') {
+                        clearInterval(checkInterval);
+                        librariesLoaded = true;
+                        resolve();
+                    }
+                }, 100);
+
+                // Timeout after 10 seconds
+                setTimeout(() => {
+                    if (!librariesLoaded) {
+                        clearInterval(checkInterval);
+                        showError('Failed to load Bitcoin libraries. Please check your internet connection and reload the page.');
+                    }
+                }, 10000);
+            });
+        }
+
         function generateWallet() {
+            if (!librariesLoaded) {
+                showError('Bitcoin libraries are still loading. Please wait a moment and try again...');
+                return;
+            }
+
             try {
                 // Generate a 12-word mnemonic (128 bits of entropy)
                 const mnemonic = bip39.generateMnemonic();
@@ -483,9 +511,10 @@
             errorDiv.classList.remove('show');
         }
 
-        // Show initial message
-        window.addEventListener('load', () => {
-            console.log('Bitcoin Wallet Generator loaded successfully');
+        // Initialize on load
+        window.addEventListener('load', async () => {
+            console.log('Bitcoin Wallet Generator initializing...');
+            await waitForLibraries();
             console.log('Libraries loaded:', {
                 bip39: typeof bip39 !== 'undefined',
                 bitcoinjs: typeof bitcoinjs !== 'undefined'
