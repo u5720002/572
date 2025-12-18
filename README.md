@@ -57,8 +57,8 @@ A web-based Bitcoin wallet address and backup code generator with balance checki
 - **P2PKH**: Legacy Bitcoin addresses (most compatible)
 
 ### Libraries
-- **bitcoinjs-lib**: Bitcoin cryptographic functions
-- **bip39**: Mnemonic phrase generation and validation
+- **bitcoinjs-lib** (6.1.3): Bitcoin cryptographic functions
+- **bip39** (3.1.0): Mnemonic phrase generation and validation
 - **blockchain.info API**: Balance checking
 
 ### Browser Compatibility
@@ -76,9 +76,8 @@ The application uses the following public APIs:
 ## Development
 
 This is a standalone HTML application with no build process required. All dependencies are loaded from CDN:
-- crypto-js (4.1.1)
-- bip39 (3.0.4)
-- bitcoinjs-lib (6.1.0)
+- bip39 (3.1.0)
+- bitcoinjs-lib (6.1.3)
 
 ## License
 

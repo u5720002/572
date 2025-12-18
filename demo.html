@@ -259,6 +259,8 @@
         <div class="warning">
             <strong>⚠️ Security Warning:</strong>
             This generator creates real Bitcoin wallet addresses. Keep your backup phrase (seed words) secure and private. Anyone with access to your backup phrase can access your funds. Never share it with anyone!
+            <br><br>
+            <strong>🚨 DEMO NOTICE:</strong> This demo version uses a limited wordlist (100 words instead of 2048) and is NOT SECURE for real wallet generation. For actual use, open index.html or index-standalone.html which use proper cryptographic libraries.
         </div>
 
         <div class="btn-group">
@@ -306,7 +308,9 @@
     </div>
 
     <script>
-        // BIP39 wordlist (first 100 words for demo - in production, use full 2048 word list)
+        // DEMO VERSION - Using limited wordlist for demonstration purposes only
+        // WARNING: This is NOT secure for real wallet generation!
+        // Real BIP39 wordlist has 2048 words for proper security
         const WORDLIST = [
             'abandon', 'ability', 'able', 'about', 'above', 'absent', 'absorb', 'abstract', 'absurd', 'abuse',
             'access', 'accident', 'account', 'accuse', 'achieve', 'acid', 'acoustic', 'acquire', 'across', 'act',
