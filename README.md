@@ -2,6 +2,10 @@
 
 A secure Bitcoin wallet address and backup code (mnemonic) generator with balance checking functionality, compatible with TrustWallet and other BIP39-compatible wallets.
 
+**Now available in two formats:**
+- 🌐 **Web Interface** - Beautiful, user-friendly browser-based application
+- 💻 **Command Line** - Terminal-based tool for advanced users
+
 ## Features
 
 - ✅ Generate real Bitcoin wallet addresses (Legacy, SegWit, Nested SegWit)
@@ -11,6 +15,15 @@ A secure Bitcoin wallet address and backup code (mnemonic) generator with balanc
 - ✅ Full TrustWallet compatibility
 - ✅ Support for both mainnet and testnet
 - ✅ Secure cryptographic key generation
+- 🌐 **NEW: Web interface with modern UI**
+
+## Screenshots
+
+### Web Interface
+![Web Interface](https://github.com/user-attachments/assets/78ee8566-523c-473d-9b10-c1f1ecde57b3)
+
+### Generated Wallet
+![Generated Wallet](https://github.com/user-attachments/assets/af254c72-6b2a-4cb6-b394-0cb08395d22a)
 
 ## Installation
 
@@ -27,7 +40,27 @@ npm install
 
 ## Usage
 
-### Generate a New Wallet
+### 🌐 Web Interface (Recommended for Most Users)
+
+Start the web server:
+```bash
+npm run web
+```
+
+Then open your browser and navigate to: `http://localhost:3000`
+
+**Features:**
+- Modern, responsive design
+- Easy-to-use interface
+- One-click copy buttons
+- Works on mobile and desktop
+- Visual mnemonic word display
+
+For detailed web interface documentation, see [WEB_GUIDE.md](WEB_GUIDE.md)
+
+### 💻 Command Line Interface
+
+#### Generate a New Wallet
 
 Generate a new Bitcoin wallet with addresses and mnemonic backup:
 

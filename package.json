@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "generate": "node wallet-generator.js"
+    "generate": "node wallet-generator.js",
+    "web": "node server.js"
   },
   "keywords": [
     "bitcoin",
@@ -18,11 +19,12 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "bitcoinjs-lib": "^6.1.5",
+    "axios": "^1.12.0",
     "bip32": "^4.0.0",
     "bip39": "^3.1.0",
-    "axios": "^1.12.0",
+    "bitcoinjs-lib": "^6.1.5",
     "ecpair": "^2.1.0",
+    "express": "^4.22.1",
     "tiny-secp256k1": "^2.2.3"
   }
 }
