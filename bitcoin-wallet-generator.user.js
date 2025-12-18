@@ -1,16 +1,17 @@
 // ==UserScript==
 // @name         Bitcoin Real Wallet Address Generator with TrustWallet Balance
 // @namespace    http://tampermonkey.net/
-// @version      1.0.0
+// @version      1.0.1
 // @description  Generate real Bitcoin wallet addresses with backup codes and check balance on TrustWallet
 // @author       u5720002
 // @match        *://*/*
 // @grant        GM_xmlhttpRequest
 // @grant        GM_addStyle
+// @grant        GM_setClipboard
 // @require      https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js
 // @require      https://cdn.jsdelivr.net/npm/bip39@3.0.4/dist/bip39.min.js
-// @require      https://bundle.run/bitcoinjs-lib@5.2.0
-// @require      https://bundle.run/bip32@2.0.6
+// @require      https://cdn.jsdelivr.net/npm/bitcoinjs-lib@5.2.0/dist/bitcoinjs-lib.min.js
+// @require      https://cdn.jsdelivr.net/npm/bip32@2.0.6/dist/index.umd.min.js
 // @run-at       document-end
 // ==/UserScript==
 
@@ -196,13 +197,54 @@
         document.getElementById('check-balance').addEventListener('click', checkBalance);
     }
 
+    // Helper function to attach event listeners to copy buttons
+    function attachCopyListeners() {
+        const copyButtons = document.querySelectorAll('.copy-btn[data-copy]');
+        copyButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const dataType = this.getAttribute('data-copy');
+                let textToCopy = '';
+                
+                switch(dataType) {
+                    case 'mnemonic':
+                        textToCopy = currentWallet.mnemonic;
+                        break;
+                    case 'address':
+                        textToCopy = currentWallet.address;
+                        break;
+                    case 'segwit':
+                        textToCopy = currentWallet.segwitAddress;
+                        break;
+                    case 'privatekey':
+                        textToCopy = currentWallet.privateKey;
+                        break;
+                }
+                
+                if (textToCopy) {
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        // Visual feedback
+                        const originalText = this.textContent;
+                        this.textContent = '✓ Copied!';
+                        setTimeout(() => {
+                            this.textContent = originalText;
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Failed to copy:', err);
+                        alert('Failed to copy to clipboard. Please copy manually.');
+                    });
+                }
+            });
+        });
+    }
+
     function generateWallet() {
         try {
             const output = document.getElementById('output');
             output.innerHTML = '<div class="loading">⏳ Generating wallet...</div>';
 
             // Generate mnemonic (backup code/seed phrase)
-            const mnemonic = bip39.generateMnemonic(256); // 24 words for maximum security
+            // 256 bits of entropy generates a 24-word mnemonic for maximum security
+            const mnemonic = bip39.generateMnemonic(256);
             
             // Generate seed from mnemonic
             const seed = bip39.mnemonicToSeedSync(mnemonic);
@@ -243,23 +285,23 @@
                     <div style="background: #fff3cd; color: #856404; padding: 10px; border-radius: 4px; margin: 5px 0; border: 1px solid #ffeeba;">
                         ⚠️ SAVE THIS SAFELY! This is your backup code to recover your wallet.
                     </div>
-                    <div style="font-family: monospace; line-height: 1.6;">${mnemonic}</div>
-                    <button class="copy-btn" onclick="navigator.clipboard.writeText('${mnemonic}')">📋 Copy</button>
+                    <div style="font-family: monospace; line-height: 1.6;" id="mnemonic-text">${mnemonic}</div>
+                    <button class="copy-btn" data-copy="mnemonic">📋 Copy</button>
                     
                     <strong>📍 Legacy Address (P2PKH):</strong>
-                    <div style="font-family: monospace;">${address}</div>
-                    <button class="copy-btn" onclick="navigator.clipboard.writeText('${address}')">📋 Copy</button>
+                    <div style="font-family: monospace;" id="address-text">${address}</div>
+                    <button class="copy-btn" data-copy="address">📋 Copy</button>
                     
                     <strong>📍 SegWit Address (P2WPKH):</strong>
-                    <div style="font-family: monospace;">${segwitAddress}</div>
-                    <button class="copy-btn" onclick="navigator.clipboard.writeText('${segwitAddress}')">📋 Copy</button>
+                    <div style="font-family: monospace;" id="segwit-text">${segwitAddress}</div>
+                    <button class="copy-btn" data-copy="segwit">📋 Copy</button>
                     
                     <strong>🔐 Private Key (WIF):</strong>
                     <div style="background: #fff3cd; color: #856404; padding: 10px; border-radius: 4px; margin: 5px 0; border: 1px solid #ffeeba;">
                         ⚠️ NEVER SHARE THIS! Keep it absolutely secret!
                     </div>
-                    <div style="font-family: monospace; font-size: 10px;">${child.toWIF()}</div>
-                    <button class="copy-btn" onclick="navigator.clipboard.writeText('${child.toWIF()}')">📋 Copy</button>
+                    <div style="font-family: monospace; font-size: 10px;" id="privatekey-text">${child.toWIF()}</div>
+                    <button class="copy-btn" data-copy="privatekey">📋 Copy</button>
                     
                     <strong>🔓 Public Key:</strong>
                     <div style="font-family: monospace; font-size: 10px;">${child.publicKey.toString('hex')}</div>
@@ -271,6 +313,9 @@
                     💡 <strong>TrustWallet Import:</strong> Use the backup code (mnemonic) or private key to import this wallet into TrustWallet.
                 </div>
             `;
+
+            // Add event listeners for copy buttons (more secure than inline onclick)
+            attachCopyListeners();
 
             console.log('✅ Bitcoin wallet generated successfully');
             console.log('Address:', address);
@@ -340,7 +385,13 @@
             const response = await fetch(`https://blockchain.info/balance?active=${addressList}`);
             
             if (!response.ok) {
-                throw new Error('Failed to fetch balance from blockchain.info');
+                if (response.status === 429) {
+                    throw new Error('Rate limit exceeded. Please wait a moment and try again.');
+                } else if (response.status >= 500) {
+                    throw new Error('Blockchain API service temporarily unavailable. Please try again later.');
+                } else {
+                    throw new Error(`API request failed with status ${response.status}`);
+                }
             }
             
             const data = await response.json();
@@ -395,7 +446,13 @@
                 };
                 
             } catch (fallbackError) {
-                throw new Error('Could not connect to balance APIs. Please check your internet connection.');
+                console.error('BlockCypher API error:', fallbackError);
+                // Provide more specific error messages
+                if (!navigator.onLine) {
+                    throw new Error('No internet connection detected. Please check your network.');
+                } else {
+                    throw new Error('Unable to connect to blockchain APIs. The services may be temporarily down. Please try again later.');
+                }
             }
         }
     }
