@@ -1,5 +1,9 @@
 const axios = require('axios');
 
+// Constants
+const SATOSHIS_PER_BTC = 100000000;
+const RATE_LIMIT_DELAY_MS = 300;
+
 /**
  * Get Bitcoin address balance using blockchain.info API
  * @param {string} address - Bitcoin address
@@ -12,7 +16,7 @@ async function getBalance(address) {
     
     // Balance is returned in satoshis, convert to BTC
     const balanceSatoshi = parseInt(response.data);
-    const balanceBTC = balanceSatoshi / 100000000;
+    const balanceBTC = balanceSatoshi / SATOSHIS_PER_BTC;
     
     return {
       address: address,
@@ -43,19 +47,19 @@ async function getAddressInfo(address) {
     
     const data = response.data;
     const balanceSatoshi = data.final_balance;
-    const balanceBTC = balanceSatoshi / 100000000;
+    const balanceBTC = balanceSatoshi / SATOSHIS_PER_BTC;
     
     return {
       address: address,
       balanceSatoshi: balanceSatoshi,
       balanceBTC: balanceBTC,
-      totalReceived: data.total_received / 100000000,
-      totalSent: data.total_sent / 100000000,
+      totalReceived: data.total_received / SATOSHIS_PER_BTC,
+      totalSent: data.total_sent / SATOSHIS_PER_BTC,
       transactionCount: data.n_tx,
       transactions: data.txs.slice(0, 10).map(tx => ({
         hash: tx.hash,
         time: new Date(tx.time * 1000).toISOString(),
-        result: tx.result / 100000000
+        result: tx.result / SATOSHIS_PER_BTC
       }))
     };
   } catch (error) {
@@ -88,7 +92,7 @@ async function checkMultipleBalances(addresses) {
       const balance = await getBalance(address);
       results.push(balance);
       // Add small delay to avoid rate limiting
-      await new Promise(resolve => setTimeout(resolve, 300));
+      await new Promise(resolve => setTimeout(resolve, RATE_LIMIT_DELAY_MS));
     } catch (error) {
       results.push({
         address: address,

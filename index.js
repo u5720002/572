@@ -153,7 +153,7 @@ async function main() {
       const info = await getAddressInfo(address);
       displayBalance(info);
     } catch (error) {
-      console.log(`\n❌ Error: ${error.message}\n`);
+      console.log(`\n❌ Error: Unable to fetch balance information.\n`);
     }
     
   } else if (command === 'help') {
