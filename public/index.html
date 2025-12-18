@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitcoin Wallet Generator - TrustWallet Compatible</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 1em;
+            color: #666;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+            font-weight: bold;
+        }
+
+        .tab:hover {
+            color: #667eea;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .wallet-display {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .wallet-display.show {
+            display: block;
+        }
+
+        .wallet-section {
+            margin-bottom: 25px;
+        }
+
+        .wallet-section h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .wallet-value {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+            border: 2px solid #e0e0e0;
+            position: relative;
+        }
+
+        .copy-btn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85em;
+        }
+
+        .copy-btn:hover {
+            background: #764ba2;
+        }
+
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .warning strong {
+            color: #856404;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .address-group {
+            display: grid;
+            gap: 15px;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .balance-info {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .mnemonic-words {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .word-box {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid #e0e0e0;
+            text-align: center;
+        }
+
+        .word-number {
+            font-size: 0.8em;
+            color: #999;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5em;
+            }
+
+            .mnemonic-words {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔐 Bitcoin Wallet Generator</h1>
+            <p>TrustWallet Compatible - BIP39/BIP44 Compliant</p>
+        </div>
+
+        <div class="content">
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('generate')">Generate Wallet</button>
+                <button class="tab" onclick="switchTab('restore')">Restore Wallet</button>
+                <button class="tab" onclick="switchTab('balance')">Check Balance</button>
+            </div>
+
+            <!-- Generate Tab -->
+            <div id="generate-tab" class="tab-content active">
+                <div class="warning">
+                    <strong>⚠️ Security Warning:</strong> Never share your mnemonic phrase or private key with anyone. Write down your backup phrase and store it securely offline.
+                </div>
+
+                <div class="form-group">
+                    <label for="network-generate">Network:</label>
+                    <select id="network-generate">
+                        <option value="mainnet">Bitcoin Mainnet</option>
+                        <option value="testnet">Bitcoin Testnet</option>
+                    </select>
+                </div>
+
+                <button class="btn" onclick="generateWallet()">Generate New Wallet</button>
+
+                <div class="loading" id="generate-loading">
+                    <div class="spinner"></div>
+                    <p>Generating secure wallet...</p>
+                </div>
+
+                <div class="wallet-display" id="wallet-result">
+                    <!-- Wallet info will be displayed here -->
+                </div>
+            </div>
+
+            <!-- Restore Tab -->
+            <div id="restore-tab" class="tab-content">
+                <div class="warning">
+                    <strong>💡 Restore Your Wallet:</strong> Enter your 12-word mnemonic phrase to restore your Bitcoin wallet.
+                </div>
+
+                <div class="form-group">
+                    <label for="mnemonic-restore">Mnemonic Phrase (12 words):</label>
+                    <input type="text" id="mnemonic-restore" placeholder="word1 word2 word3 word4 word5 word6 word7 word8 word9 word10 word11 word12">
+                </div>
+
+                <div class="form-group">
+                    <label for="network-restore">Network:</label>
+                    <select id="network-restore">
+                        <option value="mainnet">Bitcoin Mainnet</option>
+                        <option value="testnet">Bitcoin Testnet</option>
+                    </select>
+                </div>
+
+                <button class="btn" onclick="restoreWallet()">Restore Wallet</button>
+
+                <div class="loading" id="restore-loading">
+                    <div class="spinner"></div>
+                    <p>Restoring wallet...</p>
+                </div>
+
+                <div class="wallet-display" id="restore-result">
+                    <!-- Restored wallet info will be displayed here -->
+                </div>
+            </div>
+
+            <!-- Balance Tab -->
+            <div id="balance-tab" class="tab-content">
+                <div class="warning">
+                    <strong>💰 Check Balance:</strong> Enter any Bitcoin address to check its current balance.
+                </div>
+
+                <div class="form-group">
+                    <label for="address-balance">Bitcoin Address:</label>
+                    <input type="text" id="address-balance" placeholder="1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa">
+                </div>
+
+                <button class="btn" onclick="checkBalance()">Check Balance</button>
+
+                <div class="loading" id="balance-loading">
+                    <div class="spinner"></div>
+                    <p>Fetching balance...</p>
+                </div>
+
+                <div class="wallet-display" id="balance-result">
+                    <!-- Balance info will be displayed here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        async function generateWallet() {
+            const network = document.getElementById('network-generate').value;
+            const loading = document.getElementById('generate-loading');
+            const result = document.getElementById('wallet-result');
+
+            loading.classList.add('show');
+            result.classList.remove('show');
+
+            try {
+                const response = await fetch('/api/generate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ network })
+                });
+
+                const wallet = await response.json();
+                displayWallet(wallet, 'wallet-result');
+            } catch (error) {
+                alert('Error generating wallet: ' + error.message);
+            } finally {
+                loading.classList.remove('show');
+            }
+        }
+
+        async function restoreWallet() {
+            const mnemonic = document.getElementById('mnemonic-restore').value.trim();
+            const network = document.getElementById('network-restore').value;
+            const loading = document.getElementById('restore-loading');
+            const result = document.getElementById('restore-result');
+
+            if (!mnemonic) {
+                alert('Please enter your 12-word mnemonic phrase');
+                return;
+            }
+
+            loading.classList.add('show');
+            result.classList.remove('show');
+
+            try {
+                const response = await fetch('/api/restore', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ mnemonic, network })
+                });
+
+                const data = await response.json();
+                
+                if (data.error) {
+                    alert('Error: ' + data.error);
+                    return;
+                }
+
+                displayWallet(data, 'restore-result');
+            } catch (error) {
+                alert('Error restoring wallet: ' + error.message);
+            } finally {
+                loading.classList.remove('show');
+            }
+        }
+
+        async function checkBalance() {
+            const address = document.getElementById('address-balance').value.trim();
+            const loading = document.getElementById('balance-loading');
+            const result = document.getElementById('balance-result');
+
+            if (!address) {
+                alert('Please enter a Bitcoin address');
+                return;
+            }
+
+            loading.classList.add('show');
+            result.classList.remove('show');
+
+            try {
+                const response = await fetch('/api/balance', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ address })
+                });
+
+                const balance = await response.json();
+                
+                if (balance.error) {
+                    alert('Error: ' + balance.error);
+                    return;
+                }
+
+                displayBalance(balance, 'balance-result');
+            } catch (error) {
+                alert('Error checking balance: ' + error.message);
+            } finally {
+                loading.classList.remove('show');
+            }
+        }
+
+        function displayWallet(wallet, containerId) {
+            const container = document.getElementById(containerId);
+            
+            const words = wallet.mnemonic.split(' ');
+            const mnemonicHTML = words.map((word, idx) => 
+                `<div class="word-box"><div class="word-number">${idx + 1}</div><strong>${escapeHtml(word)}</strong></div>`
+            ).join('');
+
+            container.innerHTML = `
+                <div class="wallet-section">
+                    <h3>📝 Backup Code (Mnemonic Seed Phrase)</h3>
+                    <div class="mnemonic-words">${mnemonicHTML}</div>
+                    <div class="wallet-value" style="margin-top: 15px;">
+                        ${escapeHtml(wallet.mnemonic)}
+                        <button class="copy-btn" data-copy-text="${escapeHtml(wallet.mnemonic)}">Copy</button>
+                    </div>
+                </div>
+
+                <div class="wallet-section">
+                    <h3>🔑 Private Key (WIF)</h3>
+                    <div class="wallet-value">
+                        ${escapeHtml(wallet.wif)}
+                        <button class="copy-btn" data-copy-text="${escapeHtml(wallet.wif)}">Copy</button>
+                    </div>
+                </div>
+
+                <div class="wallet-section">
+                    <h3>📍 Bitcoin Addresses</h3>
+                    <div class="address-group">
+                        <div>
+                            <strong>Legacy (P2PKH):</strong>
+                            <div class="wallet-value">
+                                ${escapeHtml(wallet.addresses.legacy)}
+                                <button class="copy-btn" data-copy-text="${escapeHtml(wallet.addresses.legacy)}">Copy</button>
+                            </div>
+                        </div>
+                        <div>
+                            <strong>SegWit (bech32):</strong>
+                            <div class="wallet-value">
+                                ${escapeHtml(wallet.addresses.segwit)}
+                                <button class="copy-btn" data-copy-text="${escapeHtml(wallet.addresses.segwit)}">Copy</button>
+                            </div>
+                        </div>
+                        <div>
+                            <strong>Nested SegWit (P2SH):</strong>
+                            <div class="wallet-value">
+                                ${escapeHtml(wallet.addresses.nestedSegwit)}
+                                <button class="copy-btn" data-copy-text="${escapeHtml(wallet.addresses.nestedSegwit)}">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wallet-section">
+                    <h3>🔄 How to Import to TrustWallet</h3>
+                    <ol style="padding-left: 20px; line-height: 1.8;">
+                        <li>Open TrustWallet app</li>
+                        <li>Tap "Import Wallet"</li>
+                        <li>Select "Bitcoin (BTC)"</li>
+                        <li>Enter your 12-word mnemonic phrase</li>
+                        <li>Your wallet will be restored with the same addresses</li>
+                    </ol>
+                </div>
+            `;
+
+            container.classList.add('show');
+            
+            // Add event listeners to copy buttons
+            container.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    copyToClipboard(this.getAttribute('data-copy-text'));
+                });
+            });
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function displayBalance(balance, containerId) {
+            const container = document.getElementById(containerId);
+            
+            container.innerHTML = `
+                <div class="wallet-section">
+                    <h3>💰 Balance Information</h3>
+                    <div class="balance-info">
+                        <p><strong>Address:</strong> ${escapeHtml(balance.address)}</p>
+                        <p style="font-size: 1.5em; margin: 15px 0;"><strong>${escapeHtml(String(balance.balanceBTC))} BTC</strong></p>
+                        <p><small>${escapeHtml(String(balance.balanceSatoshi))} satoshis</small></p>
+                        ${balance.totalReceived !== undefined ? `
+                            <hr style="margin: 15px 0; border: none; border-top: 1px solid #ccc;">
+                            <p><strong>Total Received:</strong> ${escapeHtml(String(balance.totalReceived))} BTC</p>
+                            <p><strong>Total Sent:</strong> ${escapeHtml(String(balance.totalSent))} BTC</p>
+                            <p><strong>Transactions:</strong> ${escapeHtml(String(balance.transactionCount))}</p>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+
+            container.classList.add('show');
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Copied to clipboard!');
+            }).catch(err => {
+                alert('Failed to copy: ' + err);
+            });
+        }
+    </script>
+</body>
+</html>
