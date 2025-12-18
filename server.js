@@ -1,14 +1,25 @@
 const express = require('express');
 const path = require('path');
+const rateLimit = require('express-rate-limit');
 const { generateWallet, restoreWallet } = require('./wallet-generator');
 const { getBalance, getAddressInfo } = require('./balance-checker');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Rate limiter: 10 requests per minute for API endpoints
+const apiLimiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 10, // Limit each IP to 10 requests per windowMs
+  message: { error: 'Too many requests, please try again later.' }
+});
+
 // Middleware
 app.use(express.json());
 app.use(express.static('public'));
+
+// Apply rate limiting to API routes
+app.use('/api/', apiLimiter);
 
 // API Routes
 
