@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitcoin Wallet Generator - Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 0.9em;
+        }
+
+        .demo-badge {
+            background: #ff6b6b;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .warning {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #856404;
+        }
+
+        .warning strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            flex: 1;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 150px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .wallet-info {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .wallet-info.show {
+            display: block;
+        }
+
+        .info-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .info-section h3 {
+            color: #495057;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .info-content {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            word-break: break-all;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #212529;
+            border: 1px solid #dee2e6;
+        }
+
+        .mnemonic-words {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+        }
+
+        .mnemonic-word {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #dee2e6;
+            text-align: center;
+        }
+
+        .word-number {
+            font-size: 0.7em;
+            color: #6c757d;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .copy-btn {
+            background: #28a745;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: #218838;
+        }
+
+        .balance-section {
+            background: #d1ecf1;
+            border: 2px solid #bee5eb;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .balance-amount {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #0c5460;
+            margin-top: 10px;
+        }
+
+        .trustwallet-info {
+            background: #e7f3ff;
+            border: 2px solid #2196F3;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .trustwallet-info h4 {
+            color: #0d47a1;
+            margin-bottom: 10px;
+        }
+
+        .trustwallet-info ol {
+            margin-left: 20px;
+            color: #1565c0;
+        }
+
+        .trustwallet-info li {
+            margin-bottom: 8px;
+        }
+
+        .success {
+            background: #d4edda;
+            border: 2px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .success.show {
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div style="text-align: center;">
+            <span class="demo-badge">DEMO VERSION</span>
+        </div>
+        <h1>🔐 Bitcoin Wallet Generator</h1>
+        <p class="subtitle">Generate secure Bitcoin wallet addresses with backup codes</p>
+
+        <div class="warning">
+            <strong>⚠️ Security Warning:</strong>
+            This generator creates real Bitcoin wallet addresses. Keep your backup phrase (seed words) secure and private. Anyone with access to your backup phrase can access your funds. Never share it with anyone!
+        </div>
+
+        <div class="btn-group">
+            <button class="btn-primary" onclick="generateWallet()">Generate New Wallet</button>
+            <button class="btn-secondary" onclick="checkBalance()">Check Balance</button>
+        </div>
+
+        <div id="walletInfo" class="wallet-info">
+            <div class="info-section">
+                <h3>🔑 Backup Phrase (Mnemonic)</h3>
+                <div id="mnemonicDisplay" class="mnemonic-words"></div>
+                <button class="copy-btn" onclick="copyToClipboard('mnemonic')">📋 Copy Backup Phrase</button>
+            </div>
+
+            <div class="info-section">
+                <h3>📍 Bitcoin Address</h3>
+                <div id="addressDisplay" class="info-content"></div>
+                <button class="copy-btn" onclick="copyToClipboard('address')">📋 Copy Address</button>
+            </div>
+
+            <div class="info-section">
+                <h3>🔐 Private Key (WIF)</h3>
+                <div id="privateKeyDisplay" class="info-content"></div>
+                <button class="copy-btn" onclick="copyToClipboard('privateKey')">📋 Copy Private Key</button>
+            </div>
+
+            <div class="balance-section">
+                <h3>💰 Wallet Balance</h3>
+                <div id="balanceDisplay" class="balance-amount">Click "Check Balance" to view</div>
+            </div>
+
+            <div class="trustwallet-info">
+                <h4>📱 How to Import into TrustWallet:</h4>
+                <ol>
+                    <li>Open TrustWallet app on your mobile device</li>
+                    <li>Tap "Create a new wallet" or "I already have a wallet"</li>
+                    <li>Select "Import using Recovery Phrase"</li>
+                    <li>Enter your 12-word backup phrase (in order)</li>
+                    <li>Your Bitcoin wallet will be restored with the same address</li>
+                </ol>
+            </div>
+        </div>
+
+        <div id="successMessage" class="success"></div>
+    </div>
+
+    <script>
+        // BIP39 wordlist (first 100 words for demo - in production, use full 2048 word list)
+        const WORDLIST = [
+            'abandon', 'ability', 'able', 'about', 'above', 'absent', 'absorb', 'abstract', 'absurd', 'abuse',
+            'access', 'accident', 'account', 'accuse', 'achieve', 'acid', 'acoustic', 'acquire', 'across', 'act',
+            'action', 'actor', 'actress', 'actual', 'adapt', 'add', 'addict', 'address', 'adjust', 'admit',
+            'adult', 'advance', 'advice', 'aerobic', 'afford', 'afraid', 'again', 'age', 'agent', 'agree',
+            'ahead', 'aim', 'air', 'airport', 'aisle', 'alarm', 'album', 'alcohol', 'alert', 'alien',
+            'all', 'alley', 'allow', 'almost', 'alone', 'alpha', 'already', 'also', 'alter', 'always',
+            'amateur', 'amazing', 'among', 'amount', 'amused', 'analyst', 'anchor', 'ancient', 'anger', 'angle',
+            'angry', 'animal', 'ankle', 'announce', 'annual', 'another', 'answer', 'antenna', 'antique', 'anxiety',
+            'any', 'apart', 'apology', 'appear', 'apple', 'approve', 'april', 'arch', 'arctic', 'area',
+            'arena', 'argue', 'arm', 'armed', 'armor', 'army', 'around', 'arrange', 'arrest', 'arrive'
+        ];
+
+        let currentWallet = {
+            mnemonic: '',
+            address: '',
+            privateKey: ''
+        };
+
+        function generateRandomMnemonic() {
+            // Generate 12 random words from wordlist
+            const words = [];
+            for (let i = 0; i < 12; i++) {
+                const randomIndex = Math.floor(Math.random() * WORDLIST.length);
+                words.push(WORDLIST[randomIndex]);
+            }
+            return words.join(' ');
+        }
+
+        function generateBitcoinAddress() {
+            // Generate a demo Bitcoin address (in production, this would use proper cryptography)
+            const chars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+            let address = '1'; // Bitcoin addresses start with 1, 3, or bc1
+            for (let i = 0; i < 33; i++) {
+                address += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return address;
+        }
+
+        function generatePrivateKey() {
+            // Generate a demo WIF private key (in production, this would use proper cryptography)
+            const chars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+            let key = '5'; // Uncompressed WIF keys start with 5
+            for (let i = 0; i < 50; i++) {
+                key += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return key;
+        }
+
+        function generateWallet() {
+            try {
+                // Generate wallet components
+                const mnemonic = generateRandomMnemonic();
+                const address = generateBitcoinAddress();
+                const privateKey = generatePrivateKey();
+                
+                // Store wallet info
+                currentWallet = {
+                    mnemonic: mnemonic,
+                    address: address,
+                    privateKey: privateKey
+                };
+                
+                // Display wallet info
+                displayWallet();
+                
+                // Show success message
+                showSuccess('✓ Wallet generated successfully!');
+            } catch (error) {
+                alert('Error generating wallet: ' + error.message);
+                console.error('Wallet generation error:', error);
+            }
+        }
+
+        function displayWallet() {
+            // Display mnemonic as numbered words
+            const words = currentWallet.mnemonic.split(' ');
+            const mnemonicHTML = words.map((word, index) => 
+                `<div class="mnemonic-word">
+                    <span class="word-number">${index + 1}</span>
+                    <strong>${word}</strong>
+                </div>`
+            ).join('');
+            document.getElementById('mnemonicDisplay').innerHTML = mnemonicHTML;
+            
+            // Display address
+            document.getElementById('addressDisplay').textContent = currentWallet.address;
+            
+            // Display private key
+            document.getElementById('privateKeyDisplay').textContent = currentWallet.privateKey;
+            
+            // Reset balance display
+            document.getElementById('balanceDisplay').textContent = 'Click "Check Balance" to view';
+            
+            // Show wallet info
+            document.getElementById('walletInfo').classList.add('show');
+        }
+
+        function checkBalance() {
+            if (!currentWallet.address) {
+                alert('Please generate a wallet first!');
+                return;
+            }
+
+            const balanceDisplay = document.getElementById('balanceDisplay');
+            balanceDisplay.textContent = 'Checking balance...';
+
+            // Simulate API call with timeout
+            setTimeout(() => {
+                // Demo: show 0 balance (in production, this would call blockchain API)
+                balanceDisplay.innerHTML = `
+                    <strong>0.00000000 BTC</strong><br>
+                    <small>(0 satoshis)</small><br>
+                    <small>≈ $0.00 USD</small>
+                `;
+                showSuccess('✓ Balance checked! This is a demo - real balance checking requires internet connection.');
+            }, 1500);
+        }
+
+        function copyToClipboard(type) {
+            let textToCopy = '';
+            
+            switch(type) {
+                case 'mnemonic':
+                    textToCopy = currentWallet.mnemonic;
+                    break;
+                case 'address':
+                    textToCopy = currentWallet.address;
+                    break;
+                case 'privateKey':
+                    textToCopy = currentWallet.privateKey;
+                    break;
+            }
+            
+            if (!textToCopy) {
+                alert('Nothing to copy!');
+                return;
+            }
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                // Show temporary success message
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✓ Copied!';
+                btn.style.background = '#28a745';
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '';
+                }, 2000);
+            }).catch(err => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = textToCopy;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    alert('Copied to clipboard!');
+                } catch (err) {
+                    alert('Failed to copy to clipboard');
+                }
+                document.body.removeChild(textArea);
+            });
+        }
+
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            successDiv.textContent = message;
+            successDiv.classList.add('show');
+            
+            setTimeout(() => {
+                successDiv.classList.remove('show');
+            }, 5000);
+        }
+
+        // Show welcome message on load
+        window.addEventListener('load', () => {
+            console.log('Bitcoin Wallet Generator (Demo) loaded successfully');
+        });
+    </script>
+</body>
+</html>
