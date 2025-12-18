@@ -472,7 +472,7 @@
             
             const words = wallet.mnemonic.split(' ');
             const mnemonicHTML = words.map((word, idx) => 
-                `<div class="word-box"><div class="word-number">${idx + 1}</div><strong>${word}</strong></div>`
+                `<div class="word-box"><div class="word-number">${idx + 1}</div><strong>${escapeHtml(word)}</strong></div>`
             ).join('');
 
             container.innerHTML = `
@@ -480,16 +480,16 @@
                     <h3>📝 Backup Code (Mnemonic Seed Phrase)</h3>
                     <div class="mnemonic-words">${mnemonicHTML}</div>
                     <div class="wallet-value" style="margin-top: 15px;">
-                        ${wallet.mnemonic}
-                        <button class="copy-btn" onclick="copyToClipboard('${wallet.mnemonic}')">Copy</button>
+                        ${escapeHtml(wallet.mnemonic)}
+                        <button class="copy-btn" data-copy-text="${escapeHtml(wallet.mnemonic)}">Copy</button>
                     </div>
                 </div>
 
                 <div class="wallet-section">
                     <h3>🔑 Private Key (WIF)</h3>
                     <div class="wallet-value">
-                        ${wallet.wif}
-                        <button class="copy-btn" onclick="copyToClipboard('${wallet.wif}')">Copy</button>
+                        ${escapeHtml(wallet.wif)}
+                        <button class="copy-btn" data-copy-text="${escapeHtml(wallet.wif)}">Copy</button>
                     </div>
                 </div>
 
@@ -499,22 +499,22 @@
                         <div>
                             <strong>Legacy (P2PKH):</strong>
                             <div class="wallet-value">
-                                ${wallet.addresses.legacy}
-                                <button class="copy-btn" onclick="copyToClipboard('${wallet.addresses.legacy}')">Copy</button>
+                                ${escapeHtml(wallet.addresses.legacy)}
+                                <button class="copy-btn" data-copy-text="${escapeHtml(wallet.addresses.legacy)}">Copy</button>
                             </div>
                         </div>
                         <div>
                             <strong>SegWit (bech32):</strong>
                             <div class="wallet-value">
-                                ${wallet.addresses.segwit}
-                                <button class="copy-btn" onclick="copyToClipboard('${wallet.addresses.segwit}')">Copy</button>
+                                ${escapeHtml(wallet.addresses.segwit)}
+                                <button class="copy-btn" data-copy-text="${escapeHtml(wallet.addresses.segwit)}">Copy</button>
                             </div>
                         </div>
                         <div>
                             <strong>Nested SegWit (P2SH):</strong>
                             <div class="wallet-value">
-                                ${wallet.addresses.nestedSegwit}
-                                <button class="copy-btn" onclick="copyToClipboard('${wallet.addresses.nestedSegwit}')">Copy</button>
+                                ${escapeHtml(wallet.addresses.nestedSegwit)}
+                                <button class="copy-btn" data-copy-text="${escapeHtml(wallet.addresses.nestedSegwit)}">Copy</button>
                             </div>
                         </div>
                     </div>
@@ -533,6 +533,19 @@
             `;
 
             container.classList.add('show');
+            
+            // Add event listeners to copy buttons
+            container.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    copyToClipboard(this.getAttribute('data-copy-text'));
+                });
+            });
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
         }
 
         function displayBalance(balance, containerId) {
@@ -542,14 +555,14 @@
                 <div class="wallet-section">
                     <h3>💰 Balance Information</h3>
                     <div class="balance-info">
-                        <p><strong>Address:</strong> ${balance.address}</p>
-                        <p style="font-size: 1.5em; margin: 15px 0;"><strong>${balance.balanceBTC} BTC</strong></p>
-                        <p><small>${balance.balanceSatoshi} satoshis</small></p>
+                        <p><strong>Address:</strong> ${escapeHtml(balance.address)}</p>
+                        <p style="font-size: 1.5em; margin: 15px 0;"><strong>${escapeHtml(String(balance.balanceBTC))} BTC</strong></p>
+                        <p><small>${escapeHtml(String(balance.balanceSatoshi))} satoshis</small></p>
                         ${balance.totalReceived !== undefined ? `
                             <hr style="margin: 15px 0; border: none; border-top: 1px solid #ccc;">
-                            <p><strong>Total Received:</strong> ${balance.totalReceived} BTC</p>
-                            <p><strong>Total Sent:</strong> ${balance.totalSent} BTC</p>
-                            <p><strong>Transactions:</strong> ${balance.transactionCount}</p>
+                            <p><strong>Total Received:</strong> ${escapeHtml(String(balance.totalReceived))} BTC</p>
+                            <p><strong>Total Sent:</strong> ${escapeHtml(String(balance.totalSent))} BTC</p>
+                            <p><strong>Transactions:</strong> ${escapeHtml(String(balance.transactionCount))}</p>
                         ` : ''}
                     </div>
                 </div>

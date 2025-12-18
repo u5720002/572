@@ -35,7 +35,7 @@ app.post('/api/restore', (req, res) => {
     const wallet = restoreWallet(mnemonic, network);
     res.json(wallet);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(400).json({ error: 'Invalid mnemonic phrase' });
   }
 });
 
