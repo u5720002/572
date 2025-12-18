@@ -1109,6 +1109,8 @@ img[src$=".svg"] {
 .review-modal-content {
     max-width: 600px;
     padding: 40px;
+    position: relative;
+    z-index: 1001;
 }
 
 .review-subtitle {
@@ -1120,6 +1122,8 @@ img[src$=".svg"] {
 
 .form-group {
     margin-bottom: 25px;
+    position: relative;
+    z-index: 1;
 }
 
 .form-group label {
@@ -1190,6 +1194,9 @@ img[src$=".svg"] {
     cursor: pointer;
     transition: all 0.3s;
     box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    position: relative;
+    z-index: 10;
+    pointer-events: auto;
 }
 
 .submit-review-btn:hover {
@@ -1199,6 +1206,19 @@ img[src$=".svg"] {
 
 .submit-review-btn:active {
     transform: translateY(0);
+}
+
+/* Desktop specific improvements for submit button */
+@media (min-width: 769px) {
+    .submit-review-btn {
+        font-size: 1.15em;
+        padding: 16px 20px;
+    }
+    
+    .submit-review-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+    }
 }
 
 /* Mobile responsiveness for review form */

@@ -242,15 +242,29 @@ function closeReviewModal() {
 }
 
 function submitReview(event) {
-    event.preventDefault();
+    // Prevent default form submission
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
     
     const name = document.getElementById('review-name').value;
     const ratingElement = document.querySelector('input[name="rating"]:checked');
     const comment = document.getElementById('review-comment').value;
     
-    // Validate rating is selected
+    // Validate all required fields
+    if (!name || !name.trim()) {
+        alert('Please enter your name.');
+        return false;
+    }
+    
     if (!ratingElement) {
         alert('Please select a rating before submitting your review.');
+        return false;
+    }
+    
+    if (!comment || !comment.trim()) {
+        alert('Please write a review comment.');
         return false;
     }
     
