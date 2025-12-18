@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCGame - Blockchain Dice Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎲 BCGame - Blockchain Dice Game</h1>
+            <p class="subtitle">Roll the dice and test your luck on the blockchain!</p>
+        </header>
+
+        <div class="wallet-section">
+            <button id="connectWallet" class="btn btn-primary">Connect Wallet</button>
+            <div id="walletInfo" class="wallet-info" style="display: none;">
+                <p>Connected: <span id="walletAddress"></span></p>
+                <p>Balance: <span id="walletBalance"></span> ETH</p>
+            </div>
+        </div>
+
+        <div class="game-section">
+            <div class="stats-panel">
+                <h3>Game Statistics</h3>
+                <div class="stat-item">
+                    <span class="stat-label">House Balance:</span>
+                    <span id="houseBalance" class="stat-value">-</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Total Games:</span>
+                    <span id="totalGames" class="stat-value">-</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Min Bet:</span>
+                    <span id="minBet" class="stat-value">-</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Max Bet:</span>
+                    <span id="maxBet" class="stat-value">-</span>
+                </div>
+            </div>
+
+            <div class="play-panel">
+                <h3>Play the Game</h3>
+                
+                <div class="form-group">
+                    <label for="betAmount">Bet Amount (ETH):</label>
+                    <input type="number" id="betAmount" step="0.001" min="0.001" max="1" value="0.1">
+                </div>
+
+                <div class="form-group">
+                    <label>Choose your number (1-6):</label>
+                    <div class="dice-selection">
+                        <button class="dice-btn" data-value="1">1</button>
+                        <button class="dice-btn" data-value="2">2</button>
+                        <button class="dice-btn" data-value="3">3</button>
+                        <button class="dice-btn" data-value="4">4</button>
+                        <button class="dice-btn" data-value="5">5</button>
+                        <button class="dice-btn" data-value="6">6</button>
+                    </div>
+                    <p class="selected-number">Selected: <span id="selectedNumber">-</span></p>
+                </div>
+
+                <button id="playGame" class="btn btn-success" disabled>🎲 Roll the Dice!</button>
+            </div>
+
+            <div class="result-panel" id="resultPanel" style="display: none;">
+                <h3>Game Result</h3>
+                <div id="resultContent"></div>
+            </div>
+        </div>
+
+        <div class="history-section">
+            <h3>Recent Games</h3>
+            <div id="gameHistory" class="game-history">
+                <p class="no-games">No games played yet. Connect your wallet and start playing!</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>⚠️ This is a demo project. Use testnet only!</p>
+            <p>Smart contract gambling carries risks. Play responsibly.</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
