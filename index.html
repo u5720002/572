@@ -338,6 +338,7 @@
                     if (!librariesLoaded) {
                         clearInterval(checkInterval);
                         showError('Failed to load Bitcoin libraries. Please check your internet connection and reload the page.');
+                        resolve(); // Resolve anyway to prevent hanging
                     }
                 }, 10000);
             });
