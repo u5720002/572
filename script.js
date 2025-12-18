@@ -246,7 +246,10 @@ function submitReview(event) {
     if (event) {
         event.preventDefault();
         event.stopPropagation();
+        event.stopImmediatePropagation();
     }
+    
+    console.log('Submit review function called'); // Debug log
     
     const name = document.getElementById('review-name').value;
     const ratingElement = document.querySelector('input[name="rating"]:checked');
@@ -269,6 +272,8 @@ function submitReview(event) {
     }
     
     const rating = ratingElement.value;
+    
+    console.log('Review submitted:', { name, rating, comment }); // Debug log
     
     // Close the review modal
     closeReviewModal();

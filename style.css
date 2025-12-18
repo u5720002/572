@@ -1213,11 +1213,32 @@ img[src$=".svg"] {
     .submit-review-btn {
         font-size: 1.15em;
         padding: 16px 20px;
+        position: relative;
+        z-index: 999999 !important;
+        pointer-events: auto !important;
+        isolation: isolate;
     }
     
     .submit-review-btn:hover {
         transform: translateY(-3px);
         box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        z-index: 999999 !important;
+    }
+    
+    .submit-review-btn:focus {
+        outline: 3px solid #667eea;
+        outline-offset: 2px;
+    }
+    
+    /* Ensure form doesn't block button */
+    #review-form {
+        position: relative;
+        z-index: auto;
+    }
+    
+    .review-modal-content {
+        pointer-events: auto;
+        isolation: isolate;
     }
 }
 
