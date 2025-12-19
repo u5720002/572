@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Gift Cards - Claim Now!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎁 FREE Gift Cards Available Today!</h1>
+            <p class="subtitle">Claim your free gift cards now - Limited time offer!</p>
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-icon">👥</span>
+                    <span class="stat-text"><strong>3M+</strong> Users Claimed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">⭐</span>
+                    <span class="stat-text"><strong>4.8/5</strong> Rating</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">💬</span>
+                    <span class="stat-text"><strong>1M+</strong> Reviews</span>
+                </div>
+            </div>
+            
+            <div class="live-activity-section">
+                <div class="live-activity-header">
+                    <span class="live-indicator">🔴 LIVE</span>
+                    <span class="activity-title">Recent Claims - <strong id="total-claims">2,847,391</strong> People Claimed Today!</span>
+                </div>
+                <div class="activity-feed" id="activity-feed">
+                    <!-- Activity items will be added here dynamically -->
+                </div>
+            </div>
+        </header>
+
+        <div class="gift-cards-grid">
+            <div class="gift-card" data-amount="70" data-type="CashApp">
+                <div class="promo-badge hot-deal">🔥 HOT DEAL</div>
+                <div class="gift-card-visual cashapp-visual">
+                    <div class="money-pattern"></div>
+                    <div class="card-shine"></div>
+                    <div class="pattern-overlay"></div>
+                    <div class="card-chip"></div>
+                    <div class="card-amount-display">$70</div>
+                    <img src="images/cashapp.svg" alt="CashApp" class="card-brand-logo">
+                </div>
+                <div class="card-header">
+                    <div class="logo-container">
+                        <span class="live-badge">🔴 LIVE</span>
+                        <img src="images/cashapp.svg" alt="CashApp" class="card-logo logo-glow logo-realtime">
+                    </div>
+                    <h3>CashApp</h3>
+                </div>
+                <div class="card-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(48.2k reviews)</span>
+                </div>
+                <div class="card-amount">$70</div>
+                <div class="timer">⏰ <span class="countdown"></span></div>
+                <button class="claim-btn" onclick="claimGiftCard('CashApp', 70)">Claim Now</button>
+            </div>
+
+            <div class="gift-card" data-amount="49" data-type="PayPal">
+                <div class="promo-badge limited-time">⏰ LIMITED TIME</div>
+                <div class="gift-card-visual paypal-visual">
+                    <div class="money-pattern"></div>
+                    <div class="card-shine"></div>
+                    <div class="pattern-overlay"></div>
+                    <div class="card-chip"></div>
+                    <div class="card-amount-display">$49</div>
+                    <img src="images/paypal.svg" alt="PayPal" class="card-brand-logo">
+                </div>
+                <div class="card-header">
+                    <div class="logo-container">
+                        <span class="live-badge">🔴 LIVE</span>
+                        <img src="images/paypal.svg" alt="PayPal" class="card-logo logo-glow logo-realtime">
+                    </div>
+                    <h3>PayPal</h3>
+                </div>
+                <div class="card-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(52.1k reviews)</span>
+                </div>
+                <div class="card-amount">$49</div>
+                <div class="timer">⏰ <span class="countdown"></span></div>
+                <button class="claim-btn" onclick="claimGiftCard('PayPal', 49)">Claim Now</button>
+            </div>
+
+            <div class="gift-card" data-amount="90" data-type="Venmo">
+                <div class="promo-badge hot-deal">🔥 HOT DEAL</div>
+                <div class="gift-card-visual venmo-visual">
+                    <div class="money-pattern"></div>
+                    <div class="card-shine"></div>
+                    <div class="pattern-overlay"></div>
+                    <div class="card-chip"></div>
+                    <div class="card-amount-display">$90</div>
+                    <img src="images/venmo.svg" alt="Venmo" class="card-brand-logo">
+                </div>
+                <div class="card-header">
+                    <div class="logo-container">
+                        <span class="live-badge">🔴 LIVE</span>
+                        <img src="images/venmo.svg" alt="Venmo" class="card-logo logo-glow logo-realtime">
+                    </div>
+                    <h3>Venmo</h3>
+                </div>
+                <div class="card-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(39.8k reviews)</span>
+                </div>
+                <div class="card-amount">$90</div>
+                <div class="timer">⏰ <span class="countdown"></span></div>
+                <button class="claim-btn" onclick="claimGiftCard('Venmo', 90)">Claim Now</button>
+            </div>
+
+            <div class="gift-card" data-amount="200" data-type="Chime">
+                <div class="promo-badge limited-time">⏰ LIMITED TIME</div>
+                <div class="gift-card-visual chime-visual">
+                    <div class="money-pattern"></div>
+                    <div class="card-shine"></div>
+                    <div class="pattern-overlay"></div>
+                    <div class="card-chip"></div>
+                    <div class="card-amount-display">$200</div>
+                    <img src="images/chime.svg" alt="Chime" class="card-brand-logo">
+                </div>
+                <div class="card-header">
+                    <div class="logo-container">
+                        <span class="live-badge">🔴 LIVE</span>
+                        <img src="images/chime.svg" alt="Chime" class="card-logo logo-glow logo-realtime">
+                    </div>
+                    <h3>Chime</h3>
+                </div>
+                <div class="card-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(61.5k reviews)</span>
+                </div>
+                <div class="card-amount">$200</div>
+                <div class="timer">⏰ <span class="countdown"></span></div>
+                <button class="claim-btn" onclick="claimGiftCard('Chime', 200)">Claim Now</button>
+            </div>
+
+            <div class="gift-card featured" data-amount="250" data-type="Visa">
+                <div class="featured-badge">BEST VALUE</div>
+                <div class="promo-badge hot-deal">🔥 HOT DEAL</div>
+                <div class="gift-card-visual visa-visual">
+                    <div class="money-pattern"></div>
+                    <div class="card-shine"></div>
+                    <div class="pattern-overlay"></div>
+                    <div class="card-chip"></div>
+                    <div class="card-amount-display">$250</div>
+                    <img src="images/visa.svg" alt="Visa" class="card-brand-logo">
+                </div>
+                <div class="card-header">
+                    <div class="logo-container">
+                        <span class="live-badge">🔴 LIVE</span>
+                        <img src="images/visa.svg" alt="Visa" class="card-logo logo-glow logo-realtime">
+                    </div>
+                    <h3>Visa</h3>
+                </div>
+                <div class="card-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(98.7k reviews)</span>
+                </div>
+                <div class="card-amount">$250</div>
+                <div class="timer">⏰ <span class="countdown"></span></div>
+                <button class="claim-btn" onclick="claimGiftCard('Visa', 250)">Claim Now</button>
+            </div>
+
+            <div class="gift-card" data-amount="50" data-type="Walmart">
+                <div class="promo-badge limited-time">⏰ LIMITED TIME</div>
+                <div class="gift-card-visual walmart-visual">
+                    <div class="money-pattern"></div>
+                    <div class="card-shine"></div>
+                    <div class="pattern-overlay"></div>
+                    <div class="card-chip"></div>
+                    <div class="card-amount-display">$50</div>
+                    <img src="images/walmart.svg" alt="Walmart" class="card-brand-logo">
+                </div>
+                <div class="card-header">
+                    <div class="logo-container">
+                        <span class="live-badge">🔴 LIVE</span>
+                        <img src="images/walmart.svg" alt="Walmart" class="card-logo logo-glow logo-realtime">
+                    </div>
+                    <h3>Walmart</h3>
+                </div>
+                <div class="card-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(44.3k reviews)</span>
+                </div>
+                <div class="card-amount">$50</div>
+                <div class="timer">⏰ <span class="countdown"></span></div>
+                <button class="claim-btn" onclick="claimGiftCard('Walmart', 50)">Claim Now</button>
+            </div>
+
+            <div class="gift-card" data-amount="30" data-type="Amazon">
+                <div class="promo-badge hot-deal">🔥 HOT DEAL</div>
+                <div class="gift-card-visual amazon-visual">
+                    <div class="money-pattern"></div>
+                    <div class="card-shine"></div>
+                    <div class="pattern-overlay"></div>
+                    <div class="card-chip"></div>
+                    <div class="card-amount-display">$30</div>
+                    <img src="images/amazon.svg" alt="Amazon" class="card-brand-logo">
+                </div>
+                <div class="card-header">
+                    <div class="logo-container">
+                        <span class="live-badge">🔴 LIVE</span>
+                        <img src="images/amazon.svg" alt="Amazon" class="card-logo logo-glow logo-realtime">
+                    </div>
+                    <h3>Amazon</h3>
+                </div>
+                <div class="card-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(87.9k reviews)</span>
+                </div>
+                <div class="card-amount">$30</div>
+                <div class="timer">⏰ <span class="countdown"></span></div>
+                <button class="claim-btn" onclick="claimGiftCard('Amazon', 30)">Claim Now</button>
+            </div>
+
+            <div class="gift-card" data-amount="20" data-type="Google Pay">
+                <div class="promo-badge limited-time">⏰ LIMITED TIME</div>
+                <div class="gift-card-visual googlepay-visual">
+                    <div class="money-pattern"></div>
+                    <div class="card-shine"></div>
+                    <div class="pattern-overlay"></div>
+                    <div class="card-chip"></div>
+                    <div class="card-amount-display">$20</div>
+                    <img src="images/googlepay.svg" alt="Google Pay" class="card-brand-logo">
+                </div>
+                <div class="card-header">
+                    <div class="logo-container">
+                        <span class="live-badge">🔴 LIVE</span>
+                        <img src="images/googlepay.svg" alt="Google Pay" class="card-logo logo-glow logo-realtime">
+                    </div>
+                    <h3>Google Pay</h3>
+                </div>
+                <div class="card-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(35.6k reviews)</span>
+                </div>
+                <div class="card-amount">$20</div>
+                <div class="timer">⏰ <span class="countdown"></span></div>
+                <button class="claim-btn" onclick="claimGiftCard('Google Pay', 20)">Claim Now</button>
+            </div>
+
+            <div class="gift-card" data-amount="50" data-type="Apple Pay">
+                <div class="promo-badge hot-deal">🔥 HOT DEAL</div>
+                <div class="gift-card-visual applepay-visual">
+                    <div class="money-pattern"></div>
+                    <div class="card-shine"></div>
+                    <div class="pattern-overlay"></div>
+                    <div class="card-chip"></div>
+                    <div class="card-amount-display">$50</div>
+                    <img src="images/applepay.svg" alt="Apple Pay" class="card-brand-logo">
+                </div>
+                <div class="card-header">
+                    <div class="logo-container">
+                        <span class="live-badge">🔴 LIVE</span>
+                        <img src="images/applepay.svg" alt="Apple Pay" class="card-logo logo-glow logo-realtime">
+                    </div>
+                    <h3>Apple Pay</h3>
+                </div>
+                <div class="card-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(56.4k reviews)</span>
+                </div>
+                <div class="card-amount">$50</div>
+                <div class="timer">⏰ <span class="countdown"></span></div>
+                <button class="claim-btn" onclick="claimGiftCard('Apple Pay', 50)">Claim Now</button>
+            </div>
+
+            <div class="gift-card" data-amount="70" data-type="Steam">
+                <div class="promo-badge limited-time">⏰ LIMITED TIME</div>
+                <div class="gift-card-visual steam-visual">
+                    <div class="money-pattern"></div>
+                    <div class="card-shine"></div>
+                    <div class="pattern-overlay"></div>
+                    <div class="card-chip"></div>
+                    <div class="card-amount-display">$70</div>
+                    <img src="images/steam.svg" alt="Steam" class="card-brand-logo">
+                </div>
+                <div class="card-header">
+                    <div class="logo-container">
+                        <span class="live-badge">🔴 LIVE</span>
+                        <img src="images/steam.svg" alt="Steam" class="card-logo logo-glow logo-realtime">
+                    </div>
+                    <h3>Steam</h3>
+                </div>
+                <div class="card-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-count">(72.3k reviews)</span>
+                </div>
+                <div class="card-amount">$70</div>
+                <div class="timer">⏰ <span class="countdown"></span></div>
+                <button class="claim-btn" onclick="claimGiftCard('Steam', 70)">Claim Now</button>
+            </div>
+        </div>
+
+        <div class="testimonials-section">
+            <h2>What Our 1M+ Users Say</h2>
+            <button class="write-review-btn" onclick="openReviewForm()">✍️ Write a Review</button>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Got my $250 Visa card instantly! This is legit, no scam. Already used it for shopping!"</p>
+                    <p class="testimonial-author">- Sarah M.</p>
+                    <p class="testimonial-verified">✓ Verified User</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Claimed 3 cards already. The Amazon one arrived in my email within minutes. Highly recommended!"</p>
+                    <p class="testimonial-author">- Mike T.</p>
+                    <p class="testimonial-verified">✓ Verified User</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"I was skeptical at first, but it actually works! Got my PayPal gift card and it's already in my account."</p>
+                    <p class="testimonial-author">- Jennifer L.</p>
+                    <p class="testimonial-verified">✓ Verified User</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Best offer I've found online! The timer creates urgency but it's totally worth claiming before it expires."</p>
+                    <p class="testimonial-author">- David K.</p>
+                    <p class="testimonial-verified">✓ Verified User</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Steam gift card worked perfectly! Bought new games with it. This site is amazing!"</p>
+                    <p class="testimonial-author">- Alex R.</p>
+                    <p class="testimonial-verified">✓ Verified User</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Can't believe it's free! Claimed the Walmart card and used it for groceries. Thank you!"</p>
+                    <p class="testimonial-author">- Maria G.</p>
+                    <p class="testimonial-verified">✓ Verified User</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>🎉 Congratulations!</h2>
+            <p id="modal-message"></p>
+            <a href="https://neel000000000000000000000000001/us/" target="_blank" rel="noopener noreferrer" class="modal-btn-link" id="continue-btn-link">
+                <button class="modal-btn" onclick="handleContinueClick(event)">Continue</button>
+            </a>
+        </div>
+    </div>
+
+    <div id="review-modal" class="modal">
+        <div class="modal-content review-modal-content">
+            <span class="close" onclick="closeReviewModal()">&times;</span>
+            <h2>✍️ Write a Review</h2>
+            <p class="review-subtitle">Share your experience and help millions of users!</p>
+            
+            <form id="review-form" onsubmit="return submitReview(event)">
+                <div class="form-group">
+                    <label for="review-name">Your Name *</label>
+                    <input type="text" id="review-name" placeholder="First name and last initial (e.g., Sarah M.)" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Your Rating *</label>
+                    <div class="star-rating">
+                        <input type="radio" name="rating" value="5" id="star5" required>
+                        <label for="star5" title="5 stars">★</label>
+                        <input type="radio" name="rating" value="4" id="star4">
+                        <label for="star4" title="4 stars">★</label>
+                        <input type="radio" name="rating" value="3" id="star3">
+                        <label for="star3" title="3 stars">★</label>
+                        <input type="radio" name="rating" value="2" id="star2">
+                        <label for="star2" title="2 stars">★</label>
+                        <input type="radio" name="rating" value="1" id="star1">
+                        <label for="star1" title="1 star">★</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="review-comment">Your Review *</label>
+                    <textarea id="review-comment" rows="5" placeholder="Tell us about your experience..." required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-review-btn" onclick="submitReview(event); return false;">Submit Review</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="vpn-warning-modal" class="modal vpn-warning-modal">
+        <div class="modal-content vpn-warning-content">
+            <h2 class="vpn-warning-title">⚠️ Important Notice</h2>
+            <p class="vpn-warning-text">
+                <strong>Do not use VPN or Proxy</strong><br><br>
+                For security reasons and to prevent fraud, please disable any VPN or Proxy services before claiming your gift cards.<br><br>
+                Using VPN/Proxy will result in your claim being rejected.
+            </p>
+            <button class="vpn-warning-btn" onclick="closeVpnWarning()">I Understand</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Free Gift Cards. All rights reserved.</p>
+            <p class="footer-links">
+                <a href="#privacy">Privacy Policy</a> | 
+                <a href="#terms">Terms of Service</a> | 
+                <a href="#contact">Contact Us</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
