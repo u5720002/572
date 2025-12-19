@@ -1322,3 +1322,83 @@ img[src$=".svg"] {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+/* VPN Warning Modal */
+.vpn-warning-modal {
+    z-index: 100000 !important;
+}
+
+.vpn-warning-content {
+    max-width: 500px;
+    text-align: center;
+    padding: 40px 30px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    border: 2px solid #ff4444;
+    box-shadow: 0 0 50px rgba(255, 68, 68, 0.5);
+}
+
+.vpn-warning-title {
+    color: #ff4444;
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+}
+
+.vpn-warning-text {
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.vpn-warning-text strong {
+    color: #ff4444;
+    font-size: 20px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.vpn-warning-btn {
+    background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(255, 68, 68, 0.4);
+}
+
+.vpn-warning-btn:hover {
+    background: linear-gradient(135deg, #ff5555 0%, #dd0000 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 68, 68, 0.6);
+}
+
+@media (max-width: 768px) {
+    .vpn-warning-content {
+        padding: 30px 20px;
+        max-width: 90%;
+    }
+    
+    .vpn-warning-title {
+        font-size: 24px;
+    }
+    
+    .vpn-warning-text {
+        font-size: 14px;
+    }
+    
+    .vpn-warning-text strong {
+        font-size: 18px;
+    }
+    
+    .vpn-warning-btn {
+        padding: 12px 30px;
+        font-size: 16px;
+    }
+}

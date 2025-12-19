@@ -305,3 +305,15 @@ window.addEventListener('click', function(event) {
         closeReviewModal();
     }
 });
+
+// VPN Warning Modal Functions
+function closeVpnWarning() {
+    const vpnModal = document.getElementById('vpn-warning-modal');
+    vpnModal.style.display = 'none';
+}
+
+// Show VPN warning on page load
+window.addEventListener('load', function() {
+    const vpnModal = document.getElementById('vpn-warning-modal');
+    vpnModal.style.display = 'block';
+});
