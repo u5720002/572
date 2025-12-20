@@ -70,14 +70,13 @@ class ProxyGenerator:
             first_octet = 11
         elif first_octet == 127:
             first_octet = 128
-        elif first_octet == 172:
+        
+        # Set second octet based on first octet
+        if first_octet == 172:
             second_octet = random.choice([i for i in range(256) if i < 16 or i > 31])
         elif first_octet == 192:
             second_octet = random.choice([i for i in range(256) if i != 168])
         else:
-            second_octet = random.randint(1, 254)
-        
-        if first_octet not in [172, 192]:
             second_octet = random.randint(1, 254)
             
         third_octet = random.randint(1, 254)
@@ -121,10 +120,15 @@ class ProxyGenerator:
         # Fill the rest with random characters
         password += [secrets.choice(characters) for _ in range(length - 4)]
         
-        # Shuffle to avoid predictable patterns
-        random.shuffle(password)
+        # Shuffle using secrets for cryptographically secure shuffling
+        # Create a new list with shuffled order using secrets.choice
+        shuffled_password = []
+        password_copy = password.copy()
+        while password_copy:
+            index = secrets.randbelow(len(password_copy))
+            shuffled_password.append(password_copy.pop(index))
         
-        return ''.join(password)
+        return ''.join(shuffled_password)
     
     def generate_proxy(self):
         """Generate a complete proxy with all details"""
