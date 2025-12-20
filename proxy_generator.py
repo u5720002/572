@@ -54,32 +54,47 @@ class ProxyGenerator:
             return self._generate_public_ip()
     
     def _generate_public_ip(self):
-        """Generate a realistic public IP address"""
-        # Avoid private IP ranges
-        valid_ranges = [
-            (1, 126),    # Class A (excluding 10.0.0.0/8)
-            (128, 191),  # Class B (excluding 172.16.0.0/12)
-            (192, 223)   # Class C (excluding 192.168.0.0/16)
+        """Generate a realistic public IP address from major ISPs (Spectrum, T-Mobile, Verizon)"""
+        # IP ranges for major ISPs
+        # Format: (first_octet, second_octet_min, second_octet_max)
+        
+        # Spectrum (Charter Communications) IP ranges
+        spectrum_ranges = [
+            (24, 0, 255),           # 24.0.0.0/8
+            (66, 56, 95),           # 66.56.0.0 - 66.95.255.255
+            (76, 96, 127),          # 76.96.0.0 - 76.127.255.255
+            (97, 64, 95),           # 97.64.0.0 - 97.95.255.255
+            (174, 96, 127),         # 174.96.0.0 - 174.127.255.255
         ]
         
-        range_choice = random.choice(valid_ranges)
-        first_octet = random.randint(range_choice[0], range_choice[1])
+        # T-Mobile IP ranges
+        tmobile_ranges = [
+            (172, 56, 57),          # 172.56.0.0 - 172.57.255.255
+            (172, 58, 59),          # 172.58.0.0 - 172.59.255.255
+            (208, 54, 55),          # 208.54.0.0 - 208.55.255.255
+        ]
         
-        # Avoid reserved ranges
-        if first_octet == 10:
-            first_octet = 11
-        elif first_octet == 127:
-            first_octet = 128
+        # Verizon IP ranges
+        verizon_ranges = [
+            (70, 0, 255),           # 70.0.0.0/8
+            (71, 0, 255),           # 71.0.0.0/8
+            (72, 0, 255),           # 72.0.0.0/8
+            (73, 0, 255),           # 73.0.0.0/8
+            (74, 0, 255),           # 74.0.0.0/8
+            (75, 0, 255),           # 75.0.0.0/8
+            (96, 224, 255),         # 96.224.0.0 - 96.255.255.255
+            (98, 64, 127),          # 98.64.0.0 - 98.127.255.255
+            (108, 0, 255),          # 108.0.0.0/8
+        ]
         
-        # Set second octet based on first octet
-        if first_octet == 172:
-            second_octet = random.choice([i for i in range(256) if i < 16 or i > 31])
-        elif first_octet == 192:
-            second_octet = random.choice([i for i in range(256) if i != 168])
-        else:
-            second_octet = random.randint(1, 254)
-            
-        third_octet = random.randint(1, 254)
+        # Combine all ISP ranges
+        all_ranges = spectrum_ranges + tmobile_ranges + verizon_ranges
+        
+        # Select a random IP range
+        ip_range = random.choice(all_ranges)
+        first_octet = ip_range[0]
+        second_octet = random.randint(ip_range[1], ip_range[2])
+        third_octet = random.randint(0, 255)
         fourth_octet = random.randint(1, 254)
         
         return f"{first_octet}.{second_octet}.{third_octet}.{fourth_octet}"

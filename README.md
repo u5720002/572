@@ -101,7 +101,7 @@ proxies = generator.generate_multiple(5)
 
 All proxy details are randomly generated to appear realistic:
 
-- **Servers**: Realistic hostnames (e.g., proxy-us456.proxynet.com) or public IP addresses
+- **Servers**: Realistic hostnames (e.g., proxy-us456.proxynet.com) or IP addresses from major ISPs (Spectrum, T-Mobile, Verizon)
 - **Ports**: Common proxy ports (8080, 3128, 1080, etc.) or valid high ports (1024-65535)
 - **Usernames**: Various patterns like user12345, proxy_456, client_7890, etc.
 - **Passwords**: 16-character secure passwords with uppercase, lowercase, digits, and special characters
