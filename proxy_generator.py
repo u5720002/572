@@ -67,11 +67,10 @@ class ProxyGenerator:
             (174, 96, 127),         # 174.96.0.0 - 174.127.255.255
         ]
         
-        # T-Mobile IP ranges
+        # T-Mobile IP ranges (corrected to valid public IPs)
         tmobile_ranges = [
-            (172, 56, 57),          # 172.56.0.0 - 172.57.255.255
-            (172, 58, 59),          # 172.58.0.0 - 172.59.255.255
             (208, 54, 55),          # 208.54.0.0 - 208.55.255.255
+            (216, 155, 157),        # 216.155.0.0 - 216.157.255.255
         ]
         
         # Verizon IP ranges
@@ -94,7 +93,7 @@ class ProxyGenerator:
         ip_range = random.choice(all_ranges)
         first_octet = ip_range[0]
         second_octet = random.randint(ip_range[1], ip_range[2])
-        third_octet = random.randint(0, 255)
+        third_octet = random.randint(1, 254)  # Avoid network addresses
         fourth_octet = random.randint(1, 254)
         
         return f"{first_octet}.{second_octet}.{third_octet}.{fourth_octet}"
