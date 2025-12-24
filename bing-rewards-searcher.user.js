@@ -479,6 +479,16 @@
 
     // Show settings dialog
     function showSettings() {
+        // Remove existing modal if any
+        const existingModal = document.getElementById('br-settings-modal');
+        if (existingModal) {
+            existingModal.remove();
+        }
+        const existingStyle = document.getElementById('br-settings-style');
+        if (existingStyle) {
+            existingStyle.remove();
+        }
+
         const config = getConfig();
 
         const modal = document.createElement('div');
@@ -511,6 +521,7 @@
         `;
 
         const modalStyle = document.createElement('style');
+        modalStyle.id = 'br-settings-style';
         modalStyle.textContent = `
             #br-settings-modal {
                 position: fixed;
@@ -566,6 +577,12 @@
         document.head.appendChild(modalStyle);
         document.body.appendChild(modal);
 
+        // Cleanup function
+        function closeModal() {
+            modal.remove();
+            modalStyle.remove();
+        }
+
         // Event listeners for settings
         document.getElementById('br-save-settings').addEventListener('click', () => {
             const desktopSearches = parseInt(document.getElementById('br-desktop-searches').value);
@@ -603,14 +620,10 @@
                 autoStart: config.autoStart
             };
             saveConfig(newConfig);
-            modal.remove();
-            modalStyle.remove();
+            closeModal();
         });
 
-        document.getElementById('br-cancel-settings').addEventListener('click', () => {
-            modal.remove();
-            modalStyle.remove();
-        });
+        document.getElementById('br-cancel-settings').addEventListener('click', closeModal);
 
         document.getElementById('br-reset-settings').addEventListener('click', () => {
             document.getElementById('br-desktop-searches').value = DEFAULT_CONFIG.desktopSearches;
@@ -621,8 +634,7 @@
 
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
-                modal.remove();
-                modalStyle.remove();
+                closeModal();
             }
         });
     }
