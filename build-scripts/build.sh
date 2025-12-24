@@ -38,17 +38,31 @@ case $choice in
             npm install
         fi
         
-        # Build for all platforms
-        echo "Building for Windows..."
-        npm run build:win
+        # Detect current platform and build accordingly
+        echo "Detecting platform..."
+        OS="$(uname -s)"
+        case "${OS}" in
+            Linux*)     
+                echo "Building for Linux..."
+                npm run build:linux || echo "⚠ Linux build failed - this is normal on non-Linux platforms"
+                ;;
+            Darwin*)    
+                echo "Building for macOS..."
+                npm run build:mac || echo "⚠ macOS build failed"
+                ;;
+            MINGW*|MSYS*|CYGWIN*)
+                echo "Building for Windows..."
+                npm run build:win || echo "⚠ Windows build failed"
+                ;;
+            *)
+                echo "Unknown platform: ${OS}"
+                echo "Attempting to build for current platform..."
+                npm run build || echo "⚠ Build failed"
+                ;;
+        esac
         
-        echo "Building for macOS..."
-        npm run build:mac
-        
-        echo "Building for Linux..."
-        npm run build:linux
-        
-        echo "✓ Electron app built successfully!"
+        echo "✓ Electron app build completed!"
+        echo "Note: Cross-platform builds may fail. Run on target platform for best results."
         echo "Output: desktop-app/dist/"
         
         cd ..

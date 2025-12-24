@@ -20,7 +20,7 @@ function createWindow() {
     icon: path.join(__dirname, 'icon.png')
   });
 
-  mainWindow.loadFile('index.html');
+  mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
   // Open DevTools in development
   // mainWindow.webContents.openDevTools();

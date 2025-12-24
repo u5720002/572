@@ -13,7 +13,10 @@ import threading
 # Add src directory to path
 if getattr(sys, 'frozen', False):
     # Running as compiled executable
-    application_path = sys._MEIPASS
+    try:
+        application_path = sys._MEIPASS
+    except AttributeError:
+        application_path = os.path.dirname(os.path.abspath(__file__))
 else:
     # Running as script
     application_path = os.path.dirname(os.path.abspath(__file__))
