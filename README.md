@@ -1,6 +1,8 @@
 # Microsoft Rewards Auto Search - 100 Tabs Userscript
 
-A Violentmonkey/Tampermonkey userscript that automates Microsoft Rewards searches by opening 100 tabs with unique search queries with just one click.
+A Violentmonkey/Tampermonkey userscript that automates Bing searches by opening 100 tabs with unique search queries with just one click.
+
+**Note**: This script only performs searches. It does not automatically collect or claim Microsoft Rewards points. Points may be earned through the Microsoft Rewards program if you are enrolled, but collection happens through Microsoft's own systems.
 
 ## Features
 
