@@ -1,0 +1,27 @@
+{
+  "name": "anti-detect-browser",
+  "version": "1.0.0",
+  "description": "Anti-detection browser automation toolkit for PC",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "example": "node examples/basic-example.js",
+    "test": "echo \"Tests not implemented yet\" && exit 0"
+  },
+  "keywords": [
+    "anti-detect",
+    "browser",
+    "automation",
+    "fingerprint",
+    "privacy",
+    "puppeteer"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^21.0.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "user-agents": "^1.0.1298"
+  }
+}
