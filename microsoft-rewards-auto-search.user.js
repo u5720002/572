@@ -161,6 +161,9 @@
         return panel;
     }
 
+    // Module-level variable for timeout ID
+    let currentTimeoutId = null;
+
     // Start automatic searching
     function startAutoSearch(reset = false) {
         let state = loadState();
@@ -194,25 +197,21 @@
         saveState(state);
 
         // Update status
-        updateStatus(`Searching... (${state.mobileCount || state.desktopCount}/${targetCount})`);
+        updateStatus(`Searching... (${isMobile ? state.mobileCount : state.desktopCount}/${targetCount})`);
 
         // Schedule next search
         const delay = getRandomDelay();
-        const timeoutId = setTimeout(() => {
+        currentTimeoutId = setTimeout(() => {
             const searchTerm = getRandomSearchTerm();
             performSearch(searchTerm);
         }, delay);
-
-        // Store timeout ID for potential cancellation
-        sessionStorage.setItem('msRewardsTimeout', timeoutId);
     }
 
     // Stop automatic searching
     function stopAutoSearch() {
-        const timeoutId = sessionStorage.getItem('msRewardsTimeout');
-        if (timeoutId) {
-            clearTimeout(parseInt(timeoutId));
-            sessionStorage.removeItem('msRewardsTimeout');
+        if (currentTimeoutId) {
+            clearTimeout(currentTimeoutId);
+            currentTimeoutId = null;
         }
         updateStatus('Stopped');
     }

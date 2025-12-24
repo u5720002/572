@@ -56,7 +56,7 @@ The script:
 
 - Progress resets daily (based on date)
 - The script only runs on bing.com
-- Search terms are randomly selected from a pool of 56 different topics
+- Search terms are randomly selected from a pool of 52 different topics
 - Each search includes a timestamp to ensure uniqueness
 - The script respects the daily limits: 30 desktop or 20 mobile searches
 
