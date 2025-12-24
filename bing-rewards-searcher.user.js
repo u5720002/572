@@ -83,8 +83,33 @@
         isRunning: false,
         currentSearch: 0,
         totalSearches: 0,
-        timeoutId: null
+        timeoutId: null,
+        countdownIntervalId: null
     };
+
+    // Load search state from storage
+    function loadSearchState() {
+        const savedState = GM_getValue('searchState', null);
+        if (savedState) {
+            try {
+                const parsed = JSON.parse(savedState);
+                searchState.isRunning = parsed.isRunning || false;
+                searchState.currentSearch = parsed.currentSearch || 0;
+                searchState.totalSearches = parsed.totalSearches || 0;
+            } catch (e) {
+                // Invalid saved state, ignore
+            }
+        }
+    }
+
+    // Save search state to storage
+    function saveSearchState() {
+        GM_setValue('searchState', JSON.stringify({
+            isRunning: searchState.isRunning,
+            currentSearch: searchState.currentSearch,
+            totalSearches: searchState.totalSearches
+        }));
+    }
 
     // Create UI Control Panel
     function createControlPanel() {
@@ -367,6 +392,7 @@
         searchState.currentSearch = 0;
         searchState.totalSearches = isMobileMode() ? config.mobileSearches : config.desktopSearches;
 
+        saveSearchState();
         updateUI();
         performNextSearch();
     }
@@ -374,14 +400,24 @@
     // Stop searches
     function stopSearches() {
         searchState.isRunning = false;
+        searchState.currentSearch = 0;
+        searchState.totalSearches = 0;
+        
         if (searchState.timeoutId) {
             clearTimeout(searchState.timeoutId);
             searchState.timeoutId = null;
         }
+        if (searchState.countdownIntervalId) {
+            clearInterval(searchState.countdownIntervalId);
+            searchState.countdownIntervalId = null;
+        }
+        
         const nextSearchDiv = document.getElementById('br-next-search');
         if (nextSearchDiv) {
             nextSearchDiv.style.display = 'none';
         }
+        
+        saveSearchState();
         updateUI();
     }
 
@@ -389,6 +425,9 @@
     function performNextSearch() {
         if (!searchState.isRunning || searchState.currentSearch >= searchState.totalSearches) {
             searchState.isRunning = false;
+            searchState.currentSearch = 0;
+            searchState.totalSearches = 0;
+            saveSearchState();
             updateUI();
             const nextSearchDiv = document.getElementById('br-next-search');
             if (nextSearchDiv) {
@@ -411,11 +450,17 @@
             let secondsLeft = Math.ceil(delay / 1000);
             if (countdownSpan) countdownSpan.textContent = secondsLeft;
 
-            const countdownInterval = setInterval(() => {
+            // Clear previous interval if any
+            if (searchState.countdownIntervalId) {
+                clearInterval(searchState.countdownIntervalId);
+            }
+
+            searchState.countdownIntervalId = setInterval(() => {
                 secondsLeft--;
                 if (countdownSpan) countdownSpan.textContent = secondsLeft;
                 if (secondsLeft <= 0) {
-                    clearInterval(countdownInterval);
+                    clearInterval(searchState.countdownIntervalId);
+                    searchState.countdownIntervalId = null;
                 }
             }, 1000);
         }
@@ -423,6 +468,7 @@
         // Perform search after delay
         searchState.timeoutId = setTimeout(() => {
             searchState.currentSearch++;
+            saveSearchState();
             updateUI();
 
             // Perform the search
@@ -522,11 +568,38 @@
 
         // Event listeners for settings
         document.getElementById('br-save-settings').addEventListener('click', () => {
+            const desktopSearches = parseInt(document.getElementById('br-desktop-searches').value);
+            const mobileSearches = parseInt(document.getElementById('br-mobile-searches').value);
+            const minDelay = parseInt(document.getElementById('br-min-delay').value);
+            const maxDelay = parseInt(document.getElementById('br-max-delay').value);
+
+            // Validate inputs
+            if (isNaN(desktopSearches) || desktopSearches < 1 || desktopSearches > 100) {
+                alert('Desktop searches must be between 1 and 100');
+                return;
+            }
+            if (isNaN(mobileSearches) || mobileSearches < 1 || mobileSearches > 100) {
+                alert('Mobile searches must be between 1 and 100');
+                return;
+            }
+            if (isNaN(minDelay) || minDelay < 1000 || minDelay > 30000) {
+                alert('Min delay must be between 1000 and 30000 milliseconds');
+                return;
+            }
+            if (isNaN(maxDelay) || maxDelay < 1000 || maxDelay > 30000) {
+                alert('Max delay must be between 1000 and 30000 milliseconds');
+                return;
+            }
+            if (minDelay > maxDelay) {
+                alert('Min delay cannot be greater than max delay');
+                return;
+            }
+
             const newConfig = {
-                desktopSearches: parseInt(document.getElementById('br-desktop-searches').value),
-                mobileSearches: parseInt(document.getElementById('br-mobile-searches').value),
-                minDelay: parseInt(document.getElementById('br-min-delay').value),
-                maxDelay: parseInt(document.getElementById('br-max-delay').value),
+                desktopSearches: desktopSearches,
+                mobileSearches: mobileSearches,
+                minDelay: minDelay,
+                maxDelay: maxDelay,
                 autoStart: config.autoStart
             };
             saveConfig(newConfig);
@@ -561,6 +634,9 @@
 
     // Initialize
     function init() {
+        // Load saved search state
+        loadSearchState();
+
         // Wait for page to load
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => {
@@ -573,7 +649,9 @@
         // Continue search if in progress
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('q') && searchState.isRunning) {
-            performNextSearch();
+            setTimeout(() => {
+                performNextSearch();
+            }, 1500);
         }
     }
 
