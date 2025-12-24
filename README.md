@@ -16,7 +16,26 @@ A comprehensive browser automation toolkit with advanced anti-detection features
 - **Hardware Information Spoofing**: Spoofs CPU cores and memory information
 - **Battery API Blocking**: Blocks battery status tracking
 
-## 📋 Requirements
+## 💻 Use as Standalone Software
+
+**Want to use this as a ready-to-run desktop application?** See our [Software Build Guide](docs/SOFTWARE_BUILD.md) to convert the code into standalone software for Windows, macOS, or Linux!
+
+We provide two options:
+- **Electron Desktop App**: Modern GUI application with installer
+- **Python Executable**: Lightweight standalone executable
+
+Quick build:
+```bash
+cd build-scripts
+./build.sh        # On macOS/Linux
+build.bat         # On Windows
+```
+
+Output: `desktop-app/dist/` - Ready to distribute!
+
+---
+
+## 📋 Requirements (For Developers)
 
 ### For JavaScript/Node.js Implementation:
 - Node.js 14 or higher
@@ -26,7 +45,7 @@ A comprehensive browser automation toolkit with advanced anti-detection features
 - Python 3.7 or higher
 - pip
 
-## 📦 Installation
+## 📦 Installation (For Developers)
 
 ### JavaScript/Node.js Version:
 
