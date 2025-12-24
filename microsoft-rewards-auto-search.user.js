@@ -36,7 +36,14 @@
         'future of', 'benefits of', 'advantages', 'disadvantages', 'pros and cons'
     ];
     
-    const searchYears = ['2024', '2025', '2023', '2022'];
+    // Generate recent years dynamically
+    const currentYear = new Date().getFullYear();
+    const searchYears = [
+        currentYear.toString(),
+        (currentYear - 1).toString(),
+        (currentYear - 2).toString(),
+        (currentYear + 1).toString() // Include next year for forward-looking searches
+    ];
     
     // Generate a random search query
     function generateRandomQuery() {
@@ -75,9 +82,12 @@
             attempts++;
         }
         
-        // If we couldn't generate enough unique queries, add numbered queries
+        // If we couldn't generate enough unique queries, add more natural fallback queries
         while(queries.size < count) {
-            queries.add(`search query ${queries.size + 1} ${Date.now()}`);
+            const topic1 = searchTopics[Math.floor(Math.random() * searchTopics.length)];
+            const topic2 = searchTopics[Math.floor(Math.random() * searchTopics.length)];
+            const modifier = searchModifiers[Math.floor(Math.random() * searchModifiers.length)];
+            queries.add(`${modifier} ${topic1} and ${topic2}`);
         }
         
         return Array.from(queries);
@@ -102,16 +112,21 @@
             const searchUrl = `https://www.bing.com/search?q=${encodeURIComponent(query)}`;
             
             // Try to use GM_openInTab if available, otherwise use window.open
-            if (typeof GM_openInTab !== 'undefined') {
-                GM_openInTab(searchUrl, { active: false, insert: true });
-            } else {
-                window.open(searchUrl, '_blank');
+            try {
+                if (typeof GM_openInTab !== 'undefined') {
+                    GM_openInTab(searchUrl, { active: false, insert: true });
+                } else {
+                    window.open(searchUrl, '_blank');
+                }
+            } catch (error) {
+                console.error(`Failed to open tab ${count + 1}:`, error);
+                // Continue with next tab even if one fails
             }
             
             count++;
             
-            // Update button text with progress
-            if (button) {
+            // Update button text with progress (with null check)
+            if (button && button.textContent !== undefined) {
                 button.textContent = `Opening... ${count}/${NUM_SEARCHES}`;
             }
         }, DELAY_BETWEEN_TABS);
