@@ -124,7 +124,7 @@ class AntiDetectBrowser:
         """
         
         # WebRTC leak protection
-        webrtc_script = """
+        webrtc_script = r"""
         const originalSetLocalDescription = RTCPeerConnection.prototype.setLocalDescription;
         RTCPeerConnection.prototype.setLocalDescription = function(...args) {
             if (args[0] && args[0].sdp) {
