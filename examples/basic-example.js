@@ -7,7 +7,7 @@ const AntiDetectBrowser = require('../src/index');
 
 async function main() {
   console.log('Anti-Detect Browser - Basic Example');
-  console.log('=' .repeat(50));
+  console.log('='.repeat(50));
 
   // Create browser instance with default config
   const browser = new AntiDetectBrowser({
