@@ -1,0 +1,100 @@
+{
+  "profiles": {
+    "default": {
+      "description": "Default profile with standard anti-detection features",
+      "config": {
+        "headless": false,
+        "protectWebRTC": true,
+        "canvasNoise": true,
+        "webGLNoise": true,
+        "audioNoise": true,
+        "windowSize": {
+          "width": 1920,
+          "height": 1080
+        }
+      }
+    },
+    "stealth": {
+      "description": "Maximum stealth with all protection features enabled",
+      "config": {
+        "headless": false,
+        "protectWebRTC": true,
+        "canvasNoise": true,
+        "webGLNoise": true,
+        "audioNoise": true,
+        "windowSize": {
+          "width": 1366,
+          "height": 768
+        }
+      }
+    },
+    "performance": {
+      "description": "Optimized for performance with minimal protections",
+      "config": {
+        "headless": true,
+        "protectWebRTC": false,
+        "canvasNoise": false,
+        "webGLNoise": false,
+        "audioNoise": false,
+        "windowSize": {
+          "width": 1280,
+          "height": 720
+        }
+      }
+    },
+    "mobile": {
+      "description": "Mobile device emulation",
+      "config": {
+        "headless": false,
+        "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1",
+        "protectWebRTC": true,
+        "canvasNoise": true,
+        "webGLNoise": true,
+        "audioNoise": true,
+        "windowSize": {
+          "width": 375,
+          "height": 667
+        }
+      }
+    }
+  },
+  "timezones": [
+    "America/New_York",
+    "America/Los_Angeles",
+    "America/Chicago",
+    "Europe/London",
+    "Europe/Paris",
+    "Europe/Berlin",
+    "Asia/Tokyo",
+    "Asia/Shanghai",
+    "Asia/Dubai",
+    "Australia/Sydney"
+  ],
+  "geolocations": {
+    "new_york": {
+      "latitude": 40.7128,
+      "longitude": -74.0060,
+      "accuracy": 100
+    },
+    "london": {
+      "latitude": 51.5074,
+      "longitude": -0.1278,
+      "accuracy": 100
+    },
+    "paris": {
+      "latitude": 48.8566,
+      "longitude": 2.3522,
+      "accuracy": 100
+    },
+    "tokyo": {
+      "latitude": 35.6762,
+      "longitude": 139.6503,
+      "accuracy": 100
+    },
+    "sydney": {
+      "latitude": -33.8688,
+      "longitude": 151.2093,
+      "accuracy": 100
+    }
+  }
+}
