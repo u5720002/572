@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Microsoft Rewards Auto Search - 500 Tabs
+// @name         Microsoft Rewards Auto Search - 100 Tabs
 // @namespace    http://tampermonkey.net/
-// @version      1.0
-// @description  One-click automation to open 500 tabs with 500 unique searches for Microsoft Rewards
+// @version      1.1
+// @description  One-click automation to open 100 tabs with 100 unique searches for Microsoft Rewards
 // @author       u5720002
 // @match        https://www.bing.com/*
 // @match        https://bing.com/*
@@ -18,7 +18,7 @@
     'use strict';
 
     // Configuration
-    const NUM_SEARCHES = 500;
+    const NUM_SEARCHES = 100;
     const DELAY_BETWEEN_TABS = 100; // milliseconds between opening each tab
     
     // Random search query generator

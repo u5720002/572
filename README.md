@@ -1,10 +1,10 @@
-# Microsoft Rewards Auto Search - 500 Tabs Userscript
+# Microsoft Rewards Auto Search - 100 Tabs Userscript
 
-A Violentmonkey/Tampermonkey userscript that automates Microsoft Rewards searches by opening 500 tabs with unique search queries with just one click.
+A Violentmonkey/Tampermonkey userscript that automates Microsoft Rewards searches by opening 100 tabs with unique search queries with just one click.
 
 ## Features
 
-- 🚀 **One-Click Automation**: Start 500 searches with a single button click
+- 🚀 **One-Click Automation**: Start 100 searches with a single button click
 - 🎲 **Random Search Queries**: Generates unique, randomized search queries to simulate natural browsing
 - ⚡ **Fast Execution**: Opens tabs with minimal delay (100ms between each)
 - 💎 **Beautiful UI**: Floating button with gradient design and smooth animations
@@ -41,14 +41,14 @@ Alternatively, you can:
    - https://rewards.microsoft.com
    - https://www.microsoft.com
 
-2. You'll see a floating button in the bottom-right corner: **"🚀 Start 500 Searches"**
+2. You'll see a floating button in the bottom-right corner: **"🚀 Start 100 Searches"**
 
 3. Click the button
 
 4. Confirm the action in the popup dialog
 
 5. The script will automatically:
-   - Generate 500 unique search queries
+   - Generate 100 unique search queries
    - Open them in background tabs
    - Show progress on the button
    - Alert you when complete
@@ -58,20 +58,20 @@ Alternatively, you can:
 You can customize the behavior by editing these variables at the top of the script:
 
 ```javascript
-const NUM_SEARCHES = 500;           // Number of searches to perform
+const NUM_SEARCHES = 100;           // Number of searches to perform
 const DELAY_BETWEEN_TABS = 100;     // Milliseconds between opening each tab
 ```
 
 ## How It Works
 
 1. **Random Query Generation**: The script combines topics (weather, news, sports, etc.) with modifiers (best, latest, how to, etc.) to create diverse search queries
-2. **Unique Queries**: Uses a Set to ensure all 500 queries are unique
+2. **Unique Queries**: Uses a Set to ensure all 100 queries are unique
 3. **Background Tabs**: Opens tabs in the background using `GM_openInTab` to minimize disruption
 4. **Rate Limiting**: Includes a small delay between tabs to prevent browser overload
 
 ## Important Notes
 
-⚠️ **Browser Performance**: Opening 500 tabs will temporarily consume significant memory and CPU. Make sure you have:
+⚠️ **Browser Performance**: Opening 100 tabs will temporarily consume significant memory and CPU. Make sure you have:
 - Sufficient RAM (8GB+ recommended)
 - A modern browser
 - No critical work in other tabs
@@ -93,7 +93,7 @@ const DELAY_BETWEEN_TABS = 100;     // Milliseconds between opening each tab
 - Try reducing `NUM_SEARCHES` to a smaller number
 
 **Browser becomes slow:**
-- This is normal with 500 tabs
+- This is normal with 100 tabs
 - Wait for all tabs to finish loading
 - Consider reducing `NUM_SEARCHES`
 - Close unused tabs before running
