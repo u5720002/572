@@ -16,8 +16,8 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: false,
       contextIsolation: true
-    },
-    icon: path.join(__dirname, 'icon.png')
+    }
+    // Icon is handled by electron-builder during packaging
   });
 
   mainWindow.loadFile(path.join(__dirname, 'index.html'));

@@ -264,16 +264,15 @@ hiddenimports=['missing_module_name']
 ```
 
 **Problem:** Executable is too large
-**Solution:** Use one-file mode and enable UPX compression:
-```bash
-pyinstaller --onefile --upx-dir=/path/to/upx anti_detect_browser.spec
-```
+**Solution:** Reduce size by excluding unnecessary modules in the .spec file.
+Note: UPX compression is disabled by default to avoid antivirus false positives.
 
 **Problem:** Antivirus flags the executable
 **Solution:**
+- UPX compression is disabled by default (see anti_detect_browser.spec line 42)
 - Code sign your executable
 - Add exclusion in antivirus settings
-- Build with `--noupx` flag if UPX causes issues
+- Build with `--noupx` flag if UPX causes issues (already set as default in our spec file)
 
 ---
 
