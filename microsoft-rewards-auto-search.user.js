@@ -91,7 +91,7 @@
 
     // Perform a search
     function performSearch(searchTerm) {
-        const searchUrl = `https://www.bing.com/search?q=${encodeURIComponent(searchTerm)}`;
+        const searchUrl = `https://www.bing.com/search?q=${encodeURIComponent(searchTerm)}&auto=1`;
         window.location.href = searchUrl;
     }
 
@@ -124,7 +124,7 @@
                 <strong>${searchType} Searches:</strong> ${currentCount}/${targetCount}
             </div>
             <div style="font-size: 12px; margin-bottom: 10px; opacity: 0.9;">
-                Status: <span id="status-text">${currentCount >= targetCount ? 'Completed ✓' : 'Running...'}</span>
+                Status: <span id="status-text">${currentCount >= targetCount ? 'Completed ✓' : 'Ready'}</span>
             </div>
             <button id="start-btn" style="
                 background: white;
@@ -151,6 +151,7 @@
 
         // Add event listeners
         document.getElementById('start-btn').addEventListener('click', () => {
+            updateStatus('Starting...');
             startAutoSearch(true);
         });
 
@@ -176,6 +177,9 @@
                 state.desktopCount = 0;
             }
             saveState(state);
+            // Reload the page to update the UI
+            window.location.reload();
+            return;
         }
 
         const isMobile = isMobileUserAgent();
