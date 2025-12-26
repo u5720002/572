@@ -6,7 +6,6 @@ This generates a video with colorful animations, text overlays, and transitions.
 
 import cv2
 import numpy as np
-from datetime import datetime
 
 # Video parameters
 DURATION_SECONDS = 180  # 3 minutes
@@ -81,7 +80,6 @@ def draw_animated_shapes(img, frame_num, total_frames):
 def draw_text_overlay(img, frame_num, total_frames):
     """Add text overlay with information"""
     elapsed = frame_num / FPS
-    remaining = DURATION_SECONDS - elapsed
     
     # Title text
     title = "3-Minute Short Video"

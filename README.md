@@ -17,14 +17,13 @@ The generated video `short_video_3min.mp4` is a 3-minute (180 seconds) video fea
 - Python 3.x
 - OpenCV (cv2)
 - NumPy
-- Pillow
 
 ## Installation
 
 Install the required Python packages:
 
 ```bash
-pip install opencv-python numpy pillow
+pip install opencv-python numpy
 ```
 
 ## Usage
