@@ -102,12 +102,37 @@ async function typeText(text, element) {
     currentOutput = text;
 }
 
+// Show notification
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.textContent = message;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 25px;
+        background: ${type === 'error' ? '#ff6b6b' : '#51cf66'};
+        color: white;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        z-index: 1000;
+        animation: slideIn 0.3s ease-out;
+    `;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease-out';
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
+}
+
 // Generate AI response
 async function generateAI() {
     const prompt = promptInput.value.trim();
     
     if (!prompt) {
-        alert('Please enter a prompt!');
+        showNotification('Please enter a prompt!', 'error');
         return;
     }
     
@@ -170,7 +195,7 @@ async function copyToClipboard() {
             copyBtn.style.borderColor = '';
         }, 2000);
     } catch (err) {
-        alert('Failed to copy text');
+        showNotification('Failed to copy to clipboard. Please try again.', 'error');
     }
 }
 
