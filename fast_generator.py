@@ -10,7 +10,6 @@ from datetime import datetime
 
 try:
     from moviepy import ColorClip, TextClip, CompositeVideoClip, concatenate_videoclips
-    import numpy as np
 except ImportError as e:
     print(f"Error: Required libraries not installed: {e}")
     print("Please install dependencies: pip install -r requirements.txt")

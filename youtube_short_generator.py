@@ -4,7 +4,6 @@ YouTube Short Video AI Generator
 Creates a 3-minute AI-generated video suitable for YouTube Shorts
 """
 
-import os
 import sys
 from pathlib import Path
 from datetime import datetime
@@ -16,7 +15,6 @@ try:
         CompositeVideoClip,
         concatenate_videoclips
     )
-    from PIL import Image, ImageDraw, ImageFont
     import numpy as np
 except ImportError as e:
     print(f"Error: Required libraries not installed: {e}")
