@@ -10,17 +10,16 @@ from pathlib import Path
 from datetime import datetime
 
 try:
-    from moviepy.editor import (
+    from moviepy import (
         VideoClip, 
         TextClip, 
-        CompositeVideoClip, 
-        AudioFileClip,
+        CompositeVideoClip,
         concatenate_videoclips
     )
     from PIL import Image, ImageDraw, ImageFont
     import numpy as np
-except ImportError:
-    print("Error: Required libraries not installed.")
+except ImportError as e:
+    print(f"Error: Required libraries not installed: {e}")
     print("Please install dependencies: pip install -r requirements.txt")
     sys.exit(1)
 
@@ -80,26 +79,26 @@ class YouTubeShortGenerator:
         """
         try:
             txt_clip = TextClip(
-                text,
-                fontsize=fontsize,
+                text=text,
+                font_size=fontsize,
                 color=color,
-                font='Arial-Bold',
                 size=(self.width - 100, None),
                 method='caption',
-                align='center'
+                text_align='center',
+                horizontal_align='center'
             )
             
             # Position the text
             if position == 'center':
-                txt_clip = txt_clip.set_position('center')
+                txt_clip = txt_clip.with_position('center')
             elif position == 'top':
-                txt_clip = txt_clip.set_position(('center', 100))
+                txt_clip = txt_clip.with_position(('center', 100))
             elif position == 'bottom':
-                txt_clip = txt_clip.set_position(('center', self.height - 300))
+                txt_clip = txt_clip.with_position(('center', self.height - 300))
             
             return txt_clip
         except Exception as e:
-            print(f"Warning: Could not create text clip with system font: {e}")
+            print(f"Warning: Could not create text clip: {e}")
             # Fallback to simple text
             return None
     
@@ -114,9 +113,9 @@ class YouTubeShortGenerator:
         
         # Create animated background
         background = VideoClip(
-            make_frame=self.generate_background,
+            frame_function=self.generate_background,
             duration=self.duration
-        ).set_fps(self.fps)
+        ).with_fps(self.fps)
         
         clips = [background]
         
@@ -161,8 +160,8 @@ class YouTubeShortGenerator:
                 )
                 
                 if txt_clip:
-                    txt_clip = txt_clip.set_start(segment['start'])
-                    txt_clip = txt_clip.set_duration(segment['duration'])
+                    txt_clip = txt_clip.with_start(segment['start'])
+                    txt_clip = txt_clip.with_duration(segment['duration'])
                     clips.append(txt_clip)
             except Exception as e:
                 print(f"Warning: Could not add text segment: {e}")
