@@ -6,6 +6,7 @@ class VideoGenerator {
         this.mediaRecorder = null;
         this.recordedChunks = [];
         this.videoBlob = null;
+        this.PROGRESS_UPDATE_INTERVAL = 90; // Update progress every 90 frames (3 seconds at 30fps)
         
         this.initializeElements();
         this.attachEventListeners();
@@ -101,8 +102,23 @@ class VideoGenerator {
         const stream = this.canvas.captureStream(fps);
         this.recordedChunks = [];
         
+        // Check for VP9 support, fallback to VP8 or default codec
+        const mimeTypes = [
+            'video/webm;codecs=vp9',
+            'video/webm;codecs=vp8',
+            'video/webm'
+        ];
+        
+        let selectedMimeType = mimeTypes[0];
+        for (const mimeType of mimeTypes) {
+            if (MediaRecorder.isTypeSupported(mimeType)) {
+                selectedMimeType = mimeType;
+                break;
+            }
+        }
+        
         this.mediaRecorder = new MediaRecorder(stream, {
-            mimeType: 'video/webm;codecs=vp9',
+            mimeType: selectedMimeType,
             videoBitsPerSecond: 5000000
         });
 
@@ -209,7 +225,7 @@ class VideoGenerator {
             this.ctx.fillRect(barX, barY, barWidth * progress, barHeight);
             
             // Update status periodically
-            if (frame % 90 === 0) {
+            if (frame % this.PROGRESS_UPDATE_INTERVAL === 0) {
                 this.showStatus(`Rendering: ${Math.floor(progress * 100)}%`, 'info');
             }
             
@@ -252,7 +268,7 @@ class VideoGenerator {
             this.ctx.font = '30px Arial';
             this.ctx.fillText(`${slideIndex + 1} / ${slides.length}`, this.canvas.width / 2, this.canvas.height - 100);
             
-            if (frame % 90 === 0) {
+            if (frame % this.PROGRESS_UPDATE_INTERVAL === 0) {
                 this.showStatus(`Rendering slides: ${Math.floor((frame / totalFrames) * 100)}%`, 'info');
             }
             
@@ -299,7 +315,7 @@ class VideoGenerator {
                 borderSize
             );
             
-            if (frame % 90 === 0) {
+            if (frame % this.PROGRESS_UPDATE_INTERVAL === 0) {
                 this.showStatus(`Animating text: ${Math.floor(progress * 100)}%`, 'info');
             }
             
@@ -380,7 +396,7 @@ class VideoGenerator {
             this.ctx.fillText(topic.slice(0, 15), 0, 0);
             this.ctx.restore();
             
-            if (frame % 90 === 0) {
+            if (frame % this.PROGRESS_UPDATE_INTERVAL === 0) {
                 this.showStatus(`Generating AI visuals: ${Math.floor(progress * 100)}%`, 'info');
             }
             
@@ -481,7 +497,7 @@ class VideoGenerator {
         
         // Try to use Web Share API if available
         if (navigator.share) {
-            const file = new File([this.videoBlob], 'youtube-short.webm', { type: 'video/webm' });
+            const file = new File([this.videoBlob], `youtube-short-${Date.now()}.webm`, { type: 'video/webm' });
             navigator.share({
                 title: 'AI Generated YouTube Short',
                 text: 'Check out this AI-generated video!',
