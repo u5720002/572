@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Text Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <span class="ai-icon">🤖</span>
+                <h1>AI Generator</h1>
+            </div>
+            <p class="subtitle">Transform your ideas with artificial intelligence</p>
+        </div>
+
+        <div class="main-content">
+            <div class="input-section">
+                <label for="prompt">Enter your prompt:</label>
+                <textarea 
+                    id="prompt" 
+                    placeholder="e.g., Write a creative story about a space explorer..."
+                    rows="4"
+                ></textarea>
+                
+                <div class="options">
+                    <select id="mode">
+                        <option value="creative">Creative Writing</option>
+                        <option value="code">Code Generation</option>
+                        <option value="summary">Text Summary</option>
+                        <option value="translate">Translation</option>
+                        <option value="poem">Poetry</option>
+                    </select>
+                    
+                    <button id="generateBtn" class="generate-btn">
+                        <span class="btn-text">Generate</span>
+                        <span class="btn-icon">✨</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="output-section">
+                <div class="output-header">
+                    <h2>AI Output</h2>
+                    <div class="status" id="status">Ready</div>
+                </div>
+                <div class="output-box" id="output">
+                    <p class="placeholder">Your AI-generated content will appear here...</p>
+                </div>
+                <div class="actions">
+                    <button id="copyBtn" class="action-btn" disabled>
+                        <span>📋</span> Copy
+                    </button>
+                    <button id="clearBtn" class="action-btn" disabled>
+                        <span>🗑️</span> Clear
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-value" id="charCount">0</span>
+                <span class="stat-label">Characters</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="wordCount">0</span>
+                <span class="stat-label">Words</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="generationTime">0s</span>
+                <span class="stat-label">Time</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="particles" id="particles"></div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
