@@ -1,0 +1,9 @@
+# YouTube Short Video AI Generator Dependencies
+
+# Video processing and generation
+moviepy>=1.0.3
+numpy>=1.21.0
+Pillow>=9.0.0
+
+# Optional: For enhanced text rendering
+# imageio-ffmpeg>=0.4.5
